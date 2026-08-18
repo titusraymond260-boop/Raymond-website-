@@ -3,108 +3,489 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Raymond's App — a modern, mobile-friendly web application.">
+<meta name="theme-color" content="#2196f3">
 <title>Raymond's App</title>
+
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,sans-serif;background:#eef5fb;color:#111;min-height:100vh;transition:.3s}
-body.dark{background:#121212;color:white}
-header{background:#2196f3;color:white;padding:18px;text-align:center;position:sticky;top:0;z-index:100}
-header h1{font-size:25px}
-nav{margin-top:12px}
-nav button{background:transparent;color:white;border:none;margin:5px;font-size:15px;cursor:pointer}
-.container{width:92%;max-width:600px;margin:auto;padding:30px 0}
-.page{display:none}.page.active{display:block}
-.card{background:white;padding:30px 20px;border-radius:20px;box-shadow:0 8px 25px rgba(0,0,0,.12);margin-top:20px}
-body.dark .card{background:#1f1f1f}
-h2{text-align:center;margin-bottom:25px;font-size:30px}
-p{line-height:1.7}
-input{width:100%;padding:16px;margin:10px 0;border:2px solid #ddd;border-radius:10px;font-size:18px;outline:none}
-input:focus{border-color:#2196f3}
-.main-button,.menu-button{width:100%;padding:16px;margin-top:15px;border:none;border-radius:10px;background:#2196f3;color:white;font-size:18px;font-weight:bold;cursor:pointer}
-.menu-button{padding:18px;margin:10px 0;border-radius:12px}
-.calculator{margin-top:20px}
-.display{width:100%;height:75px;padding:15px;background:#111;color:white;border-radius:12px;text-align:right;font-size:32px;margin-bottom:15px;overflow-x:auto}
-.calculator-buttons{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.calculator-buttons button{height:65px;border:none;border-radius:12px;background:#e0e0e0;font-size:22px;font-weight:bold;cursor:pointer}
-.operator{background:#2196f3!important;color:white}.equals{background:#16a085!important;color:white}.clear{background:#e74c3c!important;color:white}.zero{grid-column:span 2}
-.result{text-align:center;font-size:20px;font-weight:bold;margin-top:20px;min-height:30px}
-.welcome{text-align:center}.welcome h2{font-size:38px}.logo{font-size:60px;margin-bottom:15px}
-footer{text-align:center;padding:30px;opacity:.7}
-@media(max-width:400px){header h1{font-size:21px}.calculator-buttons button{height:58px;font-size:20px}.welcome h2{font-size:30px}}
+
+:root{
+--blue:#2196f3;
+--blue2:#1769aa;
+--green:#10b981;
+--red:#ef4444;
+--bg:#f4f8fc;
+--card:#fff;
+--text:#111827;
+--muted:#64748b;
+--line:#dbe3ec
+}
+
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:var(--bg);
+color:var(--text);
+min-height:100vh;
+transition:.25s
+}
+
+body.dark{
+--bg:#0b1220;
+--card:#151e2d;
+--text:#f8fafc;
+--muted:#a8b3c2;
+--line:#2b394d
+}
+
+header{
+position:sticky;
+top:0;
+z-index:50;
+background:linear-gradient(135deg,var(--blue),var(--blue2));
+color:#fff;
+box-shadow:0 5px 20px #0002
+}
+
+.header-inner{
+max-width:960px;
+margin:auto;
+padding:15px 16px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:12px
+}
+
+.brand{
+font-size:21px;
+font-weight:800
+}
+
+nav{
+display:flex;
+gap:4px;
+flex-wrap:wrap;
+justify-content:flex-end
+}
+
+nav button{
+border:0;
+background:transparent;
+color:#fff;
+padding:9px 10px;
+border-radius:9px;
+font-size:14px;
+cursor:pointer
+}
+
+nav button:hover{
+background:#ffffff22
+}
+
+.container{
+width:92%;
+max-width:960px;
+margin:auto;
+padding:25px 0 55px
+}
+
+.page{
+display:none;
+animation:fade .3s ease
+}
+
+.page.active{
+display:block
+}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(8px)}
+to{opacity:1;transform:none}
+}
+
+.hero{
+background:linear-gradient(135deg,#2196f3,#6c5ce7);
+color:#fff;
+border-radius:28px;
+padding:45px 22px;
+text-align:center;
+box-shadow:0 18px 40px #2196f344
+}
+
+.logo{
+font-size:62px;
+margin-bottom:10px
+}
+
+.hero h1{
+font-size:43px;
+margin-bottom:10px
+}
+
+.hero p{
+max-width:650px;
+margin:auto;
+color:#fff;
+line-height:1.7;
+opacity:.95
+}
+
+.hero-actions{
+display:flex;
+gap:10px;
+max-width:500px;
+margin:24px auto 0
+}
+
+.hero-actions button{
+flex:1;
+padding:14px;
+border:0;
+border-radius:12px;
+font-weight:700;
+font-size:16px;
+cursor:pointer
+}
+
+.primary{
+background:#fff;
+color:#1769aa
+}
+
+.secondary{
+background:#ffffff22;
+color:#fff;
+border:1px solid #ffffff66!important
+}
+
+.card{
+background:var(--card);
+padding:25px 20px;
+border-radius:22px;
+box-shadow:0 8px 28px #00000012;
+margin-top:20px
+}
+
+body.dark .card{
+box-shadow:0 8px 28px #00000055
+}
+
+h2{
+text-align:center;
+margin-bottom:20px;
+font-size:30px
+}
+
+p{
+line-height:1.7;
+color:var(--muted)
+}
+
+input{
+width:100%;
+padding:15px;
+margin:10px 0;
+border:2px solid var(--line);
+border-radius:12px;
+font-size:17px;
+outline:none;
+background:var(--card);
+color:var(--text)
+}
+
+input:focus{
+border-color:var(--blue)
+}
+
+.main-button{
+width:100%;
+padding:15px;
+margin-top:12px;
+border:0;
+border-radius:12px;
+background:var(--blue);
+color:#fff;
+font-size:17px;
+font-weight:700;
+cursor:pointer
+}
+
+.main-button:hover{
+background:var(--blue2)
+}
+
+.quick-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px;
+margin-top:20px
+}
+
+.quick{
+padding:21px;
+border:0;
+border-radius:17px;
+background:var(--card);
+color:var(--text);
+box-shadow:0 6px 20px #00000012;
+font-size:16px;
+font-weight:700;
+cursor:pointer
+}
+
+.quick span{
+display:block;
+font-size:30px;
+margin-bottom:8px
+}
+
+.quick:hover{
+transform:translateY(-2px)
+}
+
+.result{
+text-align:center;
+font-size:19px;
+font-weight:700;
+margin-top:16px;
+min-height:28px
+}
+
+.display{
+width:100%;
+height:78px;
+padding:15px;
+background:#111827;
+color:#fff;
+border-radius:14px;
+text-align:right;
+font-size:32px;
+margin-bottom:14px;
+overflow-x:auto
+}
+
+.calculator-buttons{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:9px
+}
+
+.calculator-buttons button{
+height:62px;
+border:0;
+border-radius:13px;
+background:#e5e7eb;
+color:#111;
+font-size:21px;
+font-weight:700;
+cursor:pointer
+}
+
+.calculator-buttons button:hover{
+filter:brightness(.95)
+}
+
+.operator{
+background:var(--blue)!important;
+color:#fff!important
+}
+
+.equals{
+background:var(--green)!important;
+color:#fff!important
+}
+
+.clear{
+background:var(--red)!important;
+color:#fff!important
+}
+
+.zero{
+grid-column:span 2
+}
+
+.contact-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+margin-top:20px
+}
+
+.contact{
+display:block;
+text-align:center;
+text-decoration:none;
+padding:15px;
+border-radius:12px;
+background:var(--blue);
+color:#fff;
+font-weight:700
+}
+
+.share-box{
+text-align:center
+}
+
+footer{
+text-align:center;
+padding:25px;
+color:var(--muted)
+}
+
+.small{
+font-size:14px
+}
+
+@media(max-width:650px){
+
+.header-inner{
+display:block;
+text-align:center
+}
+
+.brand{
+margin-bottom:8px
+}
+
+nav{
+justify-content:center
+}
+
+.container{
+width:94%
+}
+
+.hero{
+padding:35px 17px
+}
+
+.hero h1{
+font-size:34px
+}
+
+.hero-actions{
+flex-direction:column
+}
+
+.quick-grid{
+grid-template-columns:1fr
+}
+
+.contact-grid{
+grid-template-columns:1fr
+}
+
+}
+
+@media(max-width:380px){
+
+nav button{
+font-size:12px;
+padding:8px 7px
+}
+
+.calculator-buttons button{
+height:56px;
+font-size:19px
+}
+
+}
 </style>
 </head>
+
 <body>
+
 <header>
-<h1>Raymond's App</h1>
+<div class="header-inner">
+
+<div class="brand">🚀 Raymond's App</div>
+
 <nav>
 <button onclick="showPage('home')">Home</button>
 <button onclick="showPage('calculator')">Calculator</button>
 <button onclick="showPage('about')">About</button>
-<button onclick="toggleDarkMode()">🌙</button>
+<button onclick="toggleDarkMode()" aria-label="Toggle dark mode">🌙</button>
 </nav>
+
+</div>
 </header>
 
-<div class="container">
+<main class="container">
+
 <section id="home" class="page active">
-<div class="card welcome">
+
+<div class="hero">
+
 <div class="logo">🚀</div>
-<h2>Welcome!</h2>
-<p>Welcome to Raymond's first Python-powered website.</p><br>
-<input id="nameInput" type="text" placeholder="Enter your name">
-<button class="main-button" onclick="welcomeUser()">CONTINUE</button>
-<div id="welcomeMessage" class="result"></div>
+
+<h1>Welcome to Raymond's App</h1>
+
+<p>
+A clean, fast and mobile-friendly web project built with HTML, CSS, JavaScript and Python.
+</p>
+
+<div class="hero-actions">
+
+<button class="primary" onclick="showPage('calculator')">
+🧮 Open Calculator
+</button>
+
+<button class="secondary" onclick="showPage('about')">
+ℹ️ Learn More
+</button>
+
 </div>
+</div>
+
 <div class="card">
-<button class="menu-button" onclick="showPage('calculator')">🧮 CALCULATOR</button>
-<button class="menu-button" onclick="showPage('about')">ℹ️ ABOUT</button>
+
+<h2>👋 Welcome</h2>
+
+<p style="text-align:center">
+Enter your name and make the app yours.
+</p>
+
+<input id="nameInput"
+type="text"
+placeholder="Enter your name"
+autocomplete="name">
+
+<button class="main-button" onclick="welcomeUser()">
+CONTINUE
+</button>
+
+<div id="welcomeMessage" class="result"></div>
+
 </div>
+
+<div class="quick-grid">
+
+<button class="quick" onclick="showPage('calculator')">
+<span>🧮</span>
+Calculator
+</button>
+
+<button class="quick" onclick="showPage('about')">
+<span>👤</span>
+About
+</button>
+
+<button class="quick" onclick="shareSite()">
+<span>🔗</span>
+Share Website
+</button>
+
+</div>
+
 </section>
 
 <section id="calculator" class="page">
+
 <div class="card">
+
 <h2>🧮 Calculator</h2>
+
 <div id="display" class="display">0</div>
-<div class="calculator-buttons">
-<button class="clear" onclick="clearCalculator()">C</button>
-<button onclick="deleteLast()">DEL</button>
-<button onclick="percentage()">%</button>
-<button class="operator" onclick="chooseOperator('/')">÷</button>
-<button onclick="addNumber('7')">7</button><button onclick="addNumber('8')">8</button><button onclick="addNumber('9')">9</button><button class="operator" onclick="chooseOperator('*')">×</button>
-<button onclick="addNumber('4')">4</button><button onclick="addNumber('5')">5</button><button onclick="addNumber('6')">6</button><button class="operator" onclick="chooseOperator('-')">−</button>
-<button onclick="addNumber('1')">1</button><button onclick="addNumber('2')">2</button><button onclick="addNumber('3')">3</button><button class="operator" onclick="chooseOperator('+')">+</button>
-<button class="zero" onclick="addNumber('0')">0</button><button onclick="addNumber('.')">.</button><button class="equals" onclick="calculate()">=</button>
-</div>
-<div id="calculatorResult" class="result"></div>
-<button class="main-button" onclick="showPage('home')">← BACK HOME</button>
-</div>
-</section>
 
-<section id="about" class="page">
-<div class="card">
-<h2>ℹ️ About</h2>
-<p>This is Raymond's first Python-powered website project.</p><br>
-<p>The project combines Python, HTML, CSS and JavaScript concepts to create an interactive website.</p><br>
-<p>You can use this project as the foundation for a much bigger application.</p>
-<button class="main-button" onclick="showPage('home')">← BACK HOME</button>
-</div>
-</section>
-</div>
-
-<footer>Raymond's App © 2026</footer>
-
-<script>
-function showPage(pageName){document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));document.getElementById(pageName).classList.add("active");window.scrollTo(0,0)}
-function welcomeUser(){let name=document.getElementById("nameInput").value.trim(),message=document.getElementById("welcomeMessage");if(!name){message.innerText="Please enter your name.";return}message.innerText="Welcome, "+name+"! 👋";localStorage.setItem("username",name)}
-let currentNumber="",firstNumber=null,selectedOperator=null;
-function updateDisplay(){document.getElementById("display").innerText=currentNumber===""?"0":currentNumber}
-function addNumber(number){if(number==="."&&currentNumber.includes("."))return;currentNumber+=number;updateDisplay()}
-function chooseOperator(operator){if(currentNumber==="")return;firstNumber=parseFloat(currentNumber);selectedOperator=operator;currentNumber="";document.getElementById("calculatorResult").innerText=""}
-function calculate(){if(firstNumber===null||currentNumber===""||selectedOperator===null)return;let secondNumber=parseFloat(currentNumber),answer;if(selectedOperator==="/"&&secondNumber===0){document.getElementById("calculatorResult").innerText="Cannot divide by zero.";currentNumber="";firstNumber=null;selectedOperator=null;updateDisplay();return}if(selectedOperator==="+")answer=firstNumber+secondNumber;else if(selectedOperator==="-")answer=firstNumber-secondNumber;else if(selectedOperator==="*")answer=firstNumber*secondNumber;else if(selectedOperator==="/")answer=firstNumber/secondNumber;answer=Number(answer.toFixed(10));currentNumber=String(answer);firstNumber=null;selectedOperator=null;updateDisplay();document.getElementById("calculatorResult").innerText="Result: "+answer}
-function clearCalculator(){currentNumber="";firstNumber=null;selectedOperator=null;updateDisplay();document.getElementById("calculatorResult").innerText=""}
-function deleteLast(){currentNumber=currentNumber.slice(0,-1);updateDisplay()}
-function percentage(){if(currentNumber==="")return;currentNumber=String(parseFloat(currentNumber)/100);updateDisplay()}
-function toggleDarkMode(){document.body.classList.toggle("dark");localStorage.setItem("darkMode",document.body.classList.contains("dark"))}
-window.onload=function(){let savedName=localStorage.getItem("username");if(savedName){document.getElementById("nameInput").value=savedName;document.getElementById("welcomeMessage").innerText="Welcome back, "+savedName+"! 👋"}if(localStorage.getItem("darkMode")==="true")document.body.classList.add("dark")};
-</script>
-</body>
-</html>
+<div class="calculator-buttons
