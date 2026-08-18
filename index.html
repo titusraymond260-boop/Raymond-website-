@@ -1,395 +1,162 @@
-<!DOCTYPE html>
+          <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Raymond's App — a modern, mobile-friendly web application.">
-<meta name="theme-color" content="#2196f3">
 <title>Raymond's App</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-
-:root{
---blue:#2196f3;
---blue2:#1769aa;
---green:#10b981;
---red:#ef4444;
---bg:#f4f8fc;
---card:#fff;
---text:#111827;
---muted:#64748b;
---line:#dbe3ec
+* {
+    box-sizing: border-box;
 }
 
-body{
-font-family:Arial,Helvetica,sans-serif;
-background:var(--bg);
-color:var(--text);
-min-height:100vh;
-transition:.25s
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    color: #222;
 }
 
-body.dark{
---bg:#0b1220;
---card:#151e2d;
---text:#f8fafc;
---muted:#a8b3c2;
---line:#2b394d
+header {
+    background: #111827;
+    color: white;
+    padding: 18px;
+    text-align: center;
 }
 
-header{
-position:sticky;
-top:0;
-z-index:50;
-background:linear-gradient(135deg,var(--blue),var(--blue2));
-color:#fff;
-box-shadow:0 5px 20px #0002
+header h1 {
+    margin: 0;
+    font-size: 24px;
 }
 
-.header-inner{
-max-width:960px;
-margin:auto;
-padding:15px 16px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:12px
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
-.brand{
-font-size:21px;
-font-weight:800
+nav button {
+    border: none;
+    background: #111827;
+    color: white;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
-nav{
-display:flex;
-gap:4px;
-flex-wrap:wrap;
-justify-content:flex-end
+.page {
+    display: none;
+    max-width: 600px;
+    margin: auto;
+    padding: 25px 16px;
 }
 
-nav button{
-border:0;
-background:transparent;
-color:#fff;
-padding:9px 10px;
-border-radius:9px;
-font-size:14px;
-cursor:pointer
+.page.active {
+    display: block;
 }
 
-nav button:hover{
-background:#ffffff22
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+    margin-bottom: 20px;
 }
 
-.container{
-width:92%;
-max-width:960px;
-margin:auto;
-padding:25px 0 55px
+input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    margin: 10px 0;
 }
 
-.page{
-display:none;
-animation:fade .3s ease
+.action {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 10px;
+    background: #111827;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 8px;
 }
 
-.page.active{
-display:block
+.display {
+    background: #111827;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: right;
+    font-size: 30px;
+    min-height: 70px;
+    overflow: hidden;
+    margin-bottom: 12px;
 }
 
-@keyframes fade{
-from{opacity:0;transform:translateY(8px)}
-to{opacity:1;transform:none}
+.calculator-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
 }
 
-.hero{
-background:linear-gradient(135deg,#2196f3,#6c5ce7);
-color:#fff;
-border-radius:28px;
-padding:45px 22px;
-text-align:center;
-box-shadow:0 18px 40px #2196f344
+.calculator-buttons button {
+    border: none;
+    padding: 18px 5px;
+    border-radius: 10px;
+    background: #e5e7eb;
+    font-size: 18px;
+    cursor: pointer;
 }
 
-.logo{
-font-size:62px;
-margin-bottom:10px
+.calculator-buttons button:active,
+nav button:active,
+.action:active {
+    transform: scale(.97);
 }
 
-.hero h1{
-font-size:43px;
-margin-bottom:10px
+.operator {
+    background: #dbeafe !important;
 }
 
-.hero p{
-max-width:650px;
-margin:auto;
-color:#fff;
-line-height:1.7;
-opacity:.95
+.equal {
+    background: #111827 !important;
+    color: white;
 }
 
-.hero-actions{
-display:flex;
-gap:10px;
-max-width:500px;
-margin:24px auto 0
+.clear {
+    background: #fee2e2 !important;
 }
 
-.hero-actions button{
-flex:1;
-padding:14px;
-border:0;
-border-radius:12px;
-font-weight:700;
-font-size:16px;
-cursor:pointer
+#savedName {
+    margin-top: 15px;
+    font-weight: bold;
+    text-align: center;
 }
 
-.primary{
-background:#fff;
-color:#1769aa
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #666;
 }
 
-.secondary{
-background:#ffffff22;
-color:#fff;
-border:1px solid #ffffff66!important
-}
+@media (max-width: 400px) {
+    nav button {
+        padding: 9px 10px;
+        font-size: 13px;
+    }
 
-.card{
-background:var(--card);
-padding:25px 20px;
-border-radius:22px;
-box-shadow:0 8px 28px #00000012;
-margin-top:20px
-}
-
-body.dark .card{
-box-shadow:0 8px 28px #00000055
-}
-
-h2{
-text-align:center;
-margin-bottom:20px;
-font-size:30px
-}
-
-p{
-line-height:1.7;
-color:var(--muted)
-}
-
-input{
-width:100%;
-padding:15px;
-margin:10px 0;
-border:2px solid var(--line);
-border-radius:12px;
-font-size:17px;
-outline:none;
-background:var(--card);
-color:var(--text)
-}
-
-input:focus{
-border-color:var(--blue)
-}
-
-.main-button{
-width:100%;
-padding:15px;
-margin-top:12px;
-border:0;
-border-radius:12px;
-background:var(--blue);
-color:#fff;
-font-size:17px;
-font-weight:700;
-cursor:pointer
-}
-
-.main-button:hover{
-background:var(--blue2)
-}
-
-.quick-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:12px;
-margin-top:20px
-}
-
-.quick{
-padding:21px;
-border:0;
-border-radius:17px;
-background:var(--card);
-color:var(--text);
-box-shadow:0 6px 20px #00000012;
-font-size:16px;
-font-weight:700;
-cursor:pointer
-}
-
-.quick span{
-display:block;
-font-size:30px;
-margin-bottom:8px
-}
-
-.quick:hover{
-transform:translateY(-2px)
-}
-
-.result{
-text-align:center;
-font-size:19px;
-font-weight:700;
-margin-top:16px;
-min-height:28px
-}
-
-.display{
-width:100%;
-height:78px;
-padding:15px;
-background:#111827;
-color:#fff;
-border-radius:14px;
-text-align:right;
-font-size:32px;
-margin-bottom:14px;
-overflow-x:auto
-}
-
-.calculator-buttons{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:9px
-}
-
-.calculator-buttons button{
-height:62px;
-border:0;
-border-radius:13px;
-background:#e5e7eb;
-color:#111;
-font-size:21px;
-font-weight:700;
-cursor:pointer
-}
-
-.calculator-buttons button:hover{
-filter:brightness(.95)
-}
-
-.operator{
-background:var(--blue)!important;
-color:#fff!important
-}
-
-.equals{
-background:var(--green)!important;
-color:#fff!important
-}
-
-.clear{
-background:var(--red)!important;
-color:#fff!important
-}
-
-.zero{
-grid-column:span 2
-}
-
-.contact-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:12px;
-margin-top:20px
-}
-
-.contact{
-display:block;
-text-align:center;
-text-decoration:none;
-padding:15px;
-border-radius:12px;
-background:var(--blue);
-color:#fff;
-font-weight:700
-}
-
-.share-box{
-text-align:center
-}
-
-footer{
-text-align:center;
-padding:25px;
-color:var(--muted)
-}
-
-.small{
-font-size:14px
-}
-
-@media(max-width:650px){
-
-.header-inner{
-display:block;
-text-align:center
-}
-
-.brand{
-margin-bottom:8px
-}
-
-nav{
-justify-content:center
-}
-
-.container{
-width:94%
-}
-
-.hero{
-padding:35px 17px
-}
-
-.hero h1{
-font-size:34px
-}
-
-.hero-actions{
-flex-direction:column
-}
-
-.quick-grid{
-grid-template-columns:1fr
-}
-
-.contact-grid{
-grid-template-columns:1fr
-}
-
-}
-
-@media(max-width:380px){
-
-nav button{
-font-size:12px;
-padding:8px 7px
-}
-
-.calculator-buttons button{
-height:56px;
-font-size:19px
-}
-
+    .calculator-buttons button {
+        padding: 16px 4px;
+    }
 }
 </style>
 </head>
@@ -397,304 +164,358 @@ font-size:19px
 <body>
 
 <header>
-<div class="header-inner">
-
-<div class="brand">🚀 Raymond's App</div>
-
-<nav>
-<button onclick="showPage('home')">Home</button>
-<button onclick="showPage('calculator')">Calculator</button>
-<button onclick="showPage('about')">About</button>
-<button onclick="toggleDarkMode()" aria-label="Toggle dark mode">🌙</button>
-</nav>
-
-</div>
+    <h1>Raymond's App</h1>
+    <p>A simple mobile-friendly website</p>
 </header>
 
-<main class="container">
+<nav>
+    <button onclick="showPage('home')">Home</button>
+    <button onclick="showPage('calculator')">Calculator</button>
+    <button onclick="showPage('about')">About</button>
+    <button onclick="shareWebsite()">Share</button>
+</nav>
 
+<!-- HOME -->
 <section id="home" class="page active">
 
-<div class="hero">
+    <div class="card">
+        <h2>👋 Welcome</h2>
+        <p>Enter your name below.</p>
 
-<div class="logo">🚀</div>
+        <input
+            type="text"
+            id="nameInput"
+            placeholder="Enter your name"
+        >
 
-<h1>Welcome to Raymond's App</h1>
+        <button class="action" onclick="saveName()">
+            Save My Name
+        </button>
 
-<p>
-A clean, fast and mobile-friendly web project built with HTML, CSS, JavaScript and Python.
-</p>
+        <div id="savedName"></div>
+    </div>
 
-<div class="hero-actions">
-
-<button class="primary" onclick="showPage('calculator')">
-🧮 Open Calculator
-</button>
-
-<button class="secondary" onclick="showPage('about')">
-ℹ️ Learn More
-</button>
-
-</div>
-</div>
-
-<div class="card">
-
-<h2>👋 Welcome</h2>
-
-<p style="text-align:center">
-Enter your name and make the app yours.
-</p>
-
-<input id="nameInput"
-type="text"
-placeholder="Enter your name"
-autocomplete="name">
-
-<button class="main-button" onclick="welcomeUser()">
-CONTINUE
-</button>
-
-<div id="welcomeMessage" class="result"></div>
-
-</div>
-
-<div class="quick-grid">
-
-<button class="quick" onclick="showPage('calculator')">
-<span>🧮</span>
-Calculator
-</button>
-
-<button class="quick" onclick="showPage('about')">
-<span>👤</span>
-About
-</button>
-
-<button class="quick" onclick="shareSite()">
-<span>🔗</span>
-Share Website
-</button>
-
-</div>
+    <div class="card">
+        <h2>🚀 Explore</h2>
+        <p>Use the buttons above to open the calculator, read about the website, or share it with someone.</p>
+    </div>
 
 </section>
 
+<!-- CALCULATOR -->
 <section id="calculator" class="page">
 
-<div class="card">
+    <div class="card">
 
-<h2>🧮 Calculator</h2>
+        <h2>🧮 Calculator</h2>
 
-<div id="display" class="display">0</div>
+        <div id="display" class="display">0</div>
 
-<div class="calculator-buttons
+        <div class="calculator-buttons">
+
+            <button class="clear" onclick="clearCalculator()">C</button>
+            <button onclick="backspace()">⌫</button>
+            <button class="operator" onclick="chooseOperator('%')">%</button>
+            <button class="operator" onclick="chooseOperator('/')">÷</button>
+
+            <button onclick="addNumber('7')">7</button>
+            <button onclick="addNumber('8')">8</button>
+            <button onclick="addNumber('9')">9</button>
+            <button class="operator" onclick="chooseOperator('*')">×</button>
+
+            <button onclick="addNumber('4')">4</button>
+            <button onclick="addNumber('5')">5</button>
+            <button onclick="addNumber('6')">6</button>
+            <button class="operator" onclick="chooseOperator('-')">−</button>
+
+            <button onclick="addNumber('1')">1</button>
+            <button onclick="addNumber('2')">2</button>
+            <button onclick="addNumber('3')">3</button>
+            <button class="operator" onclick="chooseOperator('+')">+</button>
+
+            <button onclick="addNumber('0')">0</button>
+            <button onclick="addDecimal()">.</button>
+            <button class="equal" onclick="calculate()">=</button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="page">
+
+    <div class="card">
+
+        <h2>ℹ️ About</h2>
+
+        <p>
+            Welcome to Raymond's App.
+        </p>
+
+        <p>
+            This is a mobile-friendly website created to demonstrate
+            web design, programming and interactive features.
+        </p>
+
+        <p>
+            You can use the calculator, save your name and share this
+            website with other people.
+        </p>
+
+    </div>
+
+</section>
+
+<footer>
+    © 2026 Raymond's App
+</footer>
+
 <script>
-let currentInput = "";
-let operator = "";
-let firstNumber = null;
+/* =========================
+   PAGE NAVIGATION
+========================= */
 
-function updateDisplay() {
-    const display = document.getElementById("display");
-    if (display) {
-        display.textContent = currentInput || "0";
-    }
-}
+function showPage(pageId) {
 
-function calculatorInput(value) {
-    if (!isNaN(value) || value === ".") {
-        currentInput += value;
-        updateDisplay();
-    } else if (["+", "-", "*", "/"].includes(value)) {
-        if (currentInput === "") return;
+    document.querySelectorAll(".page").forEach(function(page) {
+        page.classList.remove("active");
+    });
 
-        firstNumber = parseFloat(currentInput);
-        operator = value;
-        currentInput = "";
-        updateDisplay();
-    } else if (value === "=") {
-        if (firstNumber === null || currentInput === "") return;
+    const page = document.getElementById(pageId);
 
-        const secondNumber = parseFloat(currentInput);
-        let result;
-
-        if (operator === "+") result = firstNumber + secondNumber;
-        if (operator === "-") result = firstNumber - secondNumber;
-        if (operator === "*") result = firstNumber * secondNumber;
-        if (operator === "/") {
-            if (secondNumber === 0) {
-                currentInput = "Cannot divide by zero";
-                firstNumber = null;
-                operator = "";
-                updateDisplay();
-                return;
-            }
-            result = firstNumber / secondNumber;
-        }
-
-        currentInput = String(result);
-        firstNumber = null;
-        operator = "";
-        updateDisplay();
-    } else if (value === "C") {
-        currentInput = "";
-        firstNumber = null;
-        operator = "";
-        updateDisplay();
-    }
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll(".calculator-buttons button").forEach(button => {
-        button.addEventListener("click", function () {
-            const value = this.textContent.trim();
-
-            if (value === "C" || value === "AC") {
-                calculatorInput("C");
-            } else if (value === "=" || value === "+/-") {
-                if (value === "=") calculatorInput("=");
-            } else {
-                calculatorInput(value);
-            }
+    if (page) {
+        page.classList.add("active");
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
         });
-    });
-});
-</script>
-    <script>
-document.addEventListener("DOMContentLoaded", function () {
-
-    /* =========================
-       NAME
-    ========================= */
-    const nameInput = document.querySelector(
-        'input[name="name"], input[placeholder*="name" i], input[id*="name" i]'
-    );
-
-    const nameButtons = document.querySelectorAll("button");
-
-    nameButtons.forEach(button => {
-        const text = button.textContent.trim().toLowerCase();
-
-        if (
-            text.includes("submit") ||
-            text.includes("save name") ||
-            text === "continue"
-        ) {
-            button.addEventListener("click", function () {
-                if (!nameInput) {
-                    alert("Name input not found.");
-                    return;
-                }
-
-                const name = nameInput.value.trim();
-
-                if (name === "") {
-                    alert("Please enter your name.");
-                    return;
-                }
-
-                localStorage.setItem("visitorName", name);
-
-                alert("Welcome, " + name + "!");
-
-                const nameDisplay = document.querySelector(
-                    "#nameDisplay, .name-display, [data-name-display]"
-                );
-
-                if (nameDisplay) {
-                    nameDisplay.textContent = "Welcome, " + name + "!";
-                }
-            });
-        }
-    });
+    }
+}
 
 
-    /* =========================
-       ABOUT
-    ========================= */
-    const aboutButtons = document.querySelectorAll("button, a");
+/* =========================
+   NAME
+========================= */
 
-    aboutButtons.forEach(element => {
-        const text = element.textContent.trim().toLowerCase();
+function saveName() {
 
-        if (text === "about" || text.includes("about us")) {
-            element.addEventListener("click", function (event) {
-                event.preventDefault();
+    const input = document.getElementById("nameInput");
+    const name = input.value.trim();
 
-                const aboutSection =
-                    document.querySelector("#about") ||
-                    document.querySelector(".about");
+    if (name === "") {
+        alert("Please enter your name.");
+        return;
+    }
 
-                if (aboutSection) {
-                    aboutSection.scrollIntoView({
-                        behavior: "smooth"
-                    });
-                } else {
-                    alert("About section not found.");
-                }
-            });
-        }
-    });
+    localStorage.setItem("visitorName", name);
 
+    document.getElementById("savedName").textContent =
+        "Welcome, " + name + "! 👋";
+}
 
-    /* =========================
-       SHARE WEBSITE
-    ========================= */
-    const shareButtons = document.querySelectorAll("button, a");
+window.addEventListener("DOMContentLoaded", function() {
 
-    shareButtons.forEach(element => {
-        const text = element.textContent.trim().toLowerCase();
-
-        if (
-            text === "share" ||
-            text.includes("share website") ||
-            text.includes("share site")
-        ) {
-            element.addEventListener("click", async function (event) {
-                event.preventDefault();
-
-                const websiteURL = window.location.href;
-
-                if (navigator.share) {
-                    try {
-                        await navigator.share({
-                            title: document.title || "My Website",
-                            text: "Check out my website!",
-                            url: websiteURL
-                        });
-                    } catch (error) {
-                        console.log("Share cancelled.");
-                    }
-                } else {
-                    try {
-                        await navigator.clipboard.writeText(websiteURL);
-                        alert("Website link copied! You can now paste and share it.");
-                    } catch (error) {
-                        prompt(
-                            "Copy your website link:",
-                            websiteURL
-                        );
-                    }
-                }
-            });
-        }
-    });
-
-
-    /* =========================
-       REMEMBER NAME
-    ========================= */
     const savedName = localStorage.getItem("visitorName");
 
     if (savedName) {
-        const nameDisplay = document.querySelector(
-            "#nameDisplay, .name-display, [data-name-display]"
-        );
+        document.getElementById("nameInput").value = savedName;
 
-        if (nameDisplay) {
-            nameDisplay.textContent = "Welcome back, " + savedName + "!";
-        }
+        document.getElementById("savedName").textContent =
+            "Welcome back, " + savedName + "! 👋";
     }
 
 });
-                </script>
+
+
+/* =========================
+   CALCULATOR
+========================= */
+
+let calculatorValue = "";
+let firstNumber = null;
+let currentOperator = null;
+let waitingForSecondNumber = false;
+
+function updateDisplay() {
+
+    const display = document.getElementById("display");
+
+    display.textContent =
+        calculatorValue === "" ? "0" : calculatorValue;
+}
+
+
+function addNumber(number) {
+
+    if (waitingForSecondNumber) {
+        calculatorValue = "";
+        waitingForSecondNumber = false;
+    }
+
+    calculatorValue += number;
+
+    updateDisplay();
+}
+
+
+function addDecimal() {
+
+    if (waitingForSecondNumber) {
+        calculatorValue = "0";
+        waitingForSecondNumber = false;
+    }
+
+    if (!calculatorValue.includes(".")) {
+
+        if (calculatorValue === "") {
+            calculatorValue = "0";
+        }
+
+        calculatorValue += ".";
+    }
+
+    updateDisplay();
+}
+
+
+function chooseOperator(operator) {
+
+    if (calculatorValue === "") {
+        return;
+    }
+
+    if (firstNumber !== null && currentOperator !== null) {
+        calculate();
+    }
+
+    firstNumber = parseFloat(calculatorValue);
+    currentOperator = operator;
+    waitingForSecondNumber = true;
+}
+
+
+function calculate() {
+
+    if (
+        firstNumber === null ||
+        currentOperator === null ||
+        calculatorValue === ""
+    ) {
+        return;
+    }
+
+    const secondNumber = parseFloat(calculatorValue);
+
+    let result;
+
+    if (currentOperator === "+") {
+        result = firstNumber + secondNumber;
+    }
+
+    if (currentOperator === "-") {
+        result = firstNumber - secondNumber;
+    }
+
+    if (currentOperator === "*") {
+        result = firstNumber * secondNumber;
+    }
+
+    if (currentOperator === "/") {
+
+        if (secondNumber === 0) {
+            alert("Cannot divide by zero.");
+            clearCalculator();
+            return;
+        }
+
+        result = firstNumber / secondNumber;
+    }
+
+    if (currentOperator === "%") {
+        result = firstNumber % secondNumber;
+    }
+
+    calculatorValue = String(
+        Math.round(result * 100000000) / 100000000
+    );
+
+    firstNumber = null;
+    currentOperator = null;
+    waitingForSecondNumber = true;
+
+    updateDisplay();
+}
+
+
+function clearCalculator() {
+
+    calculatorValue = "";
+    firstNumber = null;
+    currentOperator = null;
+    waitingForSecondNumber = false;
+
+    updateDisplay();
+}
+
+
+function backspace() {
+
+    if (waitingForSecondNumber) {
+        return;
+    }
+
+    calculatorValue =
+        calculatorValue.slice(0, -1);
+
+    updateDisplay();
+}
+
+
+/* =========================
+   SHARE WEBSITE
+========================= */
+
+async function shareWebsite() {
+
+    const websiteURL = window.location.href;
+
+    if (navigator.share) {
+
+        try {
+
+            await navigator.share({
+                title: "Raymond's App",
+                text: "Check out my website!",
+                url: websiteURL
+            });
+
+        } catch (error) {
+            console.log("Share cancelled.");
+        }
+
+    } else {
+
+        try {
+
+            await navigator.clipboard.writeText(websiteURL);
+
+            alert(
+                "Website link copied! You can now paste it anywhere."
+            );
+
+        } catch (error) {
+
+            prompt(
+                "Copy your website link:",
+                websiteURL
+            );
+
+        }
+    }
+}
+</script>
+
+</body>
+</html>                  
