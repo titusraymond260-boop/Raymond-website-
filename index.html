@@ -560,3 +560,141 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 </script>
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    /* =========================
+       NAME
+    ========================= */
+    const nameInput = document.querySelector(
+        'input[name="name"], input[placeholder*="name" i], input[id*="name" i]'
+    );
+
+    const nameButtons = document.querySelectorAll("button");
+
+    nameButtons.forEach(button => {
+        const text = button.textContent.trim().toLowerCase();
+
+        if (
+            text.includes("submit") ||
+            text.includes("save name") ||
+            text === "continue"
+        ) {
+            button.addEventListener("click", function () {
+                if (!nameInput) {
+                    alert("Name input not found.");
+                    return;
+                }
+
+                const name = nameInput.value.trim();
+
+                if (name === "") {
+                    alert("Please enter your name.");
+                    return;
+                }
+
+                localStorage.setItem("visitorName", name);
+
+                alert("Welcome, " + name + "!");
+
+                const nameDisplay = document.querySelector(
+                    "#nameDisplay, .name-display, [data-name-display]"
+                );
+
+                if (nameDisplay) {
+                    nameDisplay.textContent = "Welcome, " + name + "!";
+                }
+            });
+        }
+    });
+
+
+    /* =========================
+       ABOUT
+    ========================= */
+    const aboutButtons = document.querySelectorAll("button, a");
+
+    aboutButtons.forEach(element => {
+        const text = element.textContent.trim().toLowerCase();
+
+        if (text === "about" || text.includes("about us")) {
+            element.addEventListener("click", function (event) {
+                event.preventDefault();
+
+                const aboutSection =
+                    document.querySelector("#about") ||
+                    document.querySelector(".about");
+
+                if (aboutSection) {
+                    aboutSection.scrollIntoView({
+                        behavior: "smooth"
+                    });
+                } else {
+                    alert("About section not found.");
+                }
+            });
+        }
+    });
+
+
+    /* =========================
+       SHARE WEBSITE
+    ========================= */
+    const shareButtons = document.querySelectorAll("button, a");
+
+    shareButtons.forEach(element => {
+        const text = element.textContent.trim().toLowerCase();
+
+        if (
+            text === "share" ||
+            text.includes("share website") ||
+            text.includes("share site")
+        ) {
+            element.addEventListener("click", async function (event) {
+                event.preventDefault();
+
+                const websiteURL = window.location.href;
+
+                if (navigator.share) {
+                    try {
+                        await navigator.share({
+                            title: document.title || "My Website",
+                            text: "Check out my website!",
+                            url: websiteURL
+                        });
+                    } catch (error) {
+                        console.log("Share cancelled.");
+                    }
+                } else {
+                    try {
+                        await navigator.clipboard.writeText(websiteURL);
+                        alert("Website link copied! You can now paste and share it.");
+                    } catch (error) {
+                        prompt(
+                            "Copy your website link:",
+                            websiteURL
+                        );
+                    }
+                }
+            });
+        }
+    });
+
+
+    /* =========================
+       REMEMBER NAME
+    ========================= */
+    const savedName = localStorage.getItem("visitorName");
+
+    if (savedName) {
+        const nameDisplay = document.querySelector(
+            "#nameDisplay, .name-display, [data-name-display]"
+        );
+
+        if (nameDisplay) {
+            nameDisplay.textContent = "Welcome back, " + savedName + "!";
+        }
+    }
+
+});
+                </script>
