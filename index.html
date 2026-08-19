@@ -1,161 +1,274 @@
-          <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Raymond's App</title>
+
+<title>Raymond Drinks</title>
 
 <style>
-* {
-    box-sizing: border-box;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial, sans-serif;
 }
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f4f6f8;
-    color: #222;
+body{
+    background:#f5f7fb;
+    color:#222;
 }
 
-header {
-    background: #111827;
-    color: white;
-    padding: 18px;
-    text-align: center;
+/* HEADER */
+header{
+    background:linear-gradient(135deg,#ff512f,#dd2476);
+    color:white;
+    padding:20px;
+    text-align:center;
+    position:sticky;
+    top:0;
+    z-index:100;
 }
 
-header h1 {
-    margin: 0;
-    font-size: 24px;
+header h1{
+    font-size:28px;
+    margin-bottom:6px;
 }
 
-nav {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    padding: 12px;
-    background: white;
-    box-shadow: 0 2px 8px rgba(0,0,0,.08);
-    position: sticky;
-    top: 0;
-    z-index: 10;
+header p{
+    font-size:14px;
 }
 
-nav button {
-    border: none;
-    background: #111827;
-    color: white;
-    padding: 10px 14px;
-    border-radius: 8px;
-    cursor: pointer;
+/* SEARCH */
+.search-box{
+    padding:15px;
+    background:white;
 }
 
-.page {
-    display: none;
-    max-width: 600px;
-    margin: auto;
-    padding: 25px 16px;
+.search-box input{
+    width:100%;
+    padding:13px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:15px;
 }
 
-.page.active {
-    display: block;
+/* PRODUCTS */
+.container{
+    padding:15px;
+    max-width:1000px;
+    margin:auto;
 }
 
-.card {
-    background: white;
-    padding: 22px;
-    border-radius: 16px;
-    box-shadow: 0 5px 20px rgba(0,0,0,.08);
-    margin-bottom: 20px;
+.products{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:15px;
 }
 
-input {
-    width: 100%;
-    padding: 14px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    font-size: 16px;
-    margin: 10px 0;
+.card{
+    background:white;
+    border-radius:15px;
+    padding:15px;
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+    text-align:center;
 }
 
-.action {
-    width: 100%;
-    padding: 13px;
-    border: none;
-    border-radius: 10px;
-    background: #111827;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 8px;
+.drink-img{
+    font-size:55px;
+    margin-bottom:10px;
 }
 
-.display {
-    background: #111827;
-    color: white;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: right;
-    font-size: 30px;
-    min-height: 70px;
-    overflow: hidden;
-    margin-bottom: 12px;
+.card h3{
+    margin-bottom:5px;
 }
 
-.calculator-buttons {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
+.price{
+    color:#e91e63;
+    font-weight:bold;
+    margin:8px 0;
 }
 
-.calculator-buttons button {
-    border: none;
-    padding: 18px 5px;
-    border-radius: 10px;
-    background: #e5e7eb;
-    font-size: 18px;
-    cursor: pointer;
+.card button{
+    background:#ff416c;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:8px;
+    cursor:pointer;
+    width:100%;
 }
 
-.calculator-buttons button:active,
-nav button:active,
-.action:active {
-    transform: scale(.97);
+.card button:active{
+    transform:scale(.97);
 }
 
-.operator {
-    background: #dbeafe !important;
+/* CART */
+.cart{
+    background:white;
+    margin-top:20px;
+    padding:18px;
+    border-radius:15px;
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
 }
 
-.equal {
-    background: #111827 !important;
-    color: white;
+.cart h2{
+    margin-bottom:15px;
 }
 
-.clear {
-    background: #fee2e2 !important;
+.cart-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid #eee;
+    padding:12px 0;
+    gap:10px;
 }
 
-#savedName {
-    margin-top: 15px;
-    font-weight: bold;
-    text-align: center;
+.cart-info{
+    flex:1;
 }
 
-footer {
-    text-align: center;
-    padding: 25px;
-    color: #666;
+.qty{
+    display:flex;
+    align-items:center;
+    gap:7px;
 }
 
-@media (max-width: 400px) {
-    nav button {
-        padding: 9px 10px;
-        font-size: 13px;
+.qty button{
+    border:none;
+    background:#eee;
+    width:30px;
+    height:30px;
+    border-radius:6px;
+    font-weight:bold;
+}
+
+.total{
+    font-size:20px;
+    font-weight:bold;
+    margin-top:15px;
+}
+
+.order-btn{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:#25D366;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    margin-top:15px;
+}
+
+/* FEATURES */
+.features{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:12px;
+    margin-top:20px;
+}
+
+.feature{
+    background:white;
+    padding:18px;
+    text-align:center;
+    border-radius:12px;
+    box-shadow:0 3px 10px rgba(0,0,0,.06);
+}
+
+.feature button{
+    margin-top:10px;
+    padding:9px 12px;
+    border:none;
+    border-radius:7px;
+    background:#333;
+    color:white;
+}
+
+/* MODAL */
+.modal{
+    display:none;
+    position:fixed;
+    z-index:200;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.6);
+    padding:30px 15px;
+}
+
+.modal-content{
+    background:white;
+    max-width:500px;
+    margin:auto;
+    padding:25px;
+    border-radius:15px;
+}
+
+.close{
+    float:right;
+    font-size:25px;
+    cursor:pointer;
+}
+
+/* CALCULATOR */
+.calculator{
+    margin-top:15px;
+}
+
+.calculator input{
+    width:100%;
+    padding:12px;
+    margin:5px 0;
+    border:1px solid #ddd;
+    border-radius:8px;
+}
+
+.calculator button{
+    width:100%;
+    padding:12px;
+    border:none;
+    background:#ff416c;
+    color:white;
+    border-radius:8px;
+    margin-top:5px;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:25px 15px;
+    margin-top:30px;
+    background:#222;
+    color:white;
+    font-size:14px;
+}
+
+.empty{
+    color:#777;
+    text-align:center;
+    padding:15px;
+}
+
+/* SMALL PHONES */
+@media(max-width:400px){
+    header h1{
+        font-size:24px;
     }
 
-    .calculator-buttons button {
-        padding: 16px 4px;
+    .products{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .card{
+        padding:10px;
+    }
+
+    .drink-img{
+        font-size:45px;
     }
 }
 </style>
@@ -164,358 +277,555 @@ footer {
 <body>
 
 <header>
-    <h1>Raymond's App</h1>
-    <p>A simple mobile-friendly website</p>
+    <h1>🥤 Raymond Drinks</h1>
+    <p>Fresh drinks delivered to you</p>
 </header>
 
-<nav>
-    <button onclick="showPage('home')">Home</button>
-    <button onclick="showPage('calculator')">Calculator</button>
-    <button onclick="showPage('about')">About</button>
-    <button onclick="shareWebsite()">Share</button>
-</nav>
+<div class="search-box">
+    <input 
+        type="text" 
+        id="searchInput"
+        placeholder="🔍 Search for a drink..."
+        onkeyup="searchDrinks()"
+    >
+</div>
 
-<!-- HOME -->
-<section id="home" class="page active">
+<div class="container">
 
-    <div class="card">
-        <h2>👋 Welcome</h2>
-        <p>Enter your name below.</p>
+<h2 style="margin-bottom:15px;">Our Drinks</h2>
 
-        <input
-            type="text"
-            id="nameInput"
-            placeholder="Enter your name"
-        >
+<div class="products" id="products">
 
-        <button class="action" onclick="saveName()">
-            Save My Name
+    <div class="card" data-name="coca cola">
+        <div class="drink-img">🥤</div>
+        <h3>Coca Cola</h3>
+        <div class="price">₦800</div>
+        <button onclick="addToCart('Coca Cola',800)">
+            Add to Cart
         </button>
-
-        <div id="savedName"></div>
     </div>
 
-    <div class="card">
-        <h2>🚀 Explore</h2>
-        <p>Use the buttons above to open the calculator, read about the website, or share it with someone.</p>
+    <div class="card" data-name="pepsi">
+        <div class="drink-img">🥤</div>
+        <h3>Pepsi</h3>
+        <div class="price">₦700</div>
+        <button onclick="addToCart('Pepsi',700)">
+            Add to Cart
+        </button>
     </div>
 
-</section>
+    <div class="card" data-name="sprite">
+        <div class="drink-img">🥤</div>
+        <h3>Sprite</h3>
+        <div class="price">₦700</div>
+        <button onclick="addToCart('Sprite',700)">
+            Add to Cart
+        </button>
+    </div>
 
-<!-- CALCULATOR -->
-<section id="calculator" class="page">
+    <div class="card" data-name="fanta">
+        <div class="drink-img">🍊</div>
+        <h3>Fanta</h3>
+        <div class="price">₦700</div>
+        <button onclick="addToCart('Fanta',700)">
+            Add to Cart
+        </button>
+    </div>
 
-    <div class="card">
+    <div class="card" data-name="malt">
+        <div class="drink-img">🍺</div>
+        <h3>Malt</h3>
+        <div class="price">₦1,000</div>
+        <button onclick="addToCart('Malt',1000)">
+            Add to Cart
+        </button>
+    </div>
 
-        <h2>🧮 Calculator</h2>
+    <div class="card" data-name="water">
+        <div class="drink-img">💧</div>
+        <h3>Bottled Water</h3>
+        <div class="price">₦500</div>
+        <button onclick="addToCart('Bottled Water',500)">
+            Add to Cart
+        </button>
+    </div>
 
-        <div id="display" class="display">0</div>
+    <div class="card" data-name="juice">
+        <div class="drink-img">🧃</div>
+        <h3>Fruit Juice</h3>
+        <div class="price">₦1,500</div>
+        <button onclick="addToCart('Fruit Juice',1500)">
+            Add to Cart
+        </button>
+    </div>
 
-        <div class="calculator-buttons">
+    <div class="card" data-name="energy drink">
+        <div class="drink-img">⚡</div>
+        <h3>Energy Drink</h3>
+        <div class="price">₦1,500</div>
+        <button onclick="addToCart('Energy Drink',1500)">
+            Add to Cart
+        </button>
+    </div>
 
-            <button class="clear" onclick="clearCalculator()">C</button>
-            <button onclick="backspace()">⌫</button>
-            <button class="operator" onclick="chooseOperator('%')">%</button>
-            <button class="operator" onclick="chooseOperator('/')">÷</button>
+</div>
 
-            <button onclick="addNumber('7')">7</button>
-            <button onclick="addNumber('8')">8</button>
-            <button onclick="addNumber('9')">9</button>
-            <button class="operator" onclick="chooseOperator('*')">×</button>
+<!-- CART -->
 
-            <button onclick="addNumber('4')">4</button>
-            <button onclick="addNumber('5')">5</button>
-            <button onclick="addNumber('6')">6</button>
-            <button class="operator" onclick="chooseOperator('-')">−</button>
+<div class="cart">
 
-            <button onclick="addNumber('1')">1</button>
-            <button onclick="addNumber('2')">2</button>
-            <button onclick="addNumber('3')">3</button>
-            <button class="operator" onclick="chooseOperator('+')">+</button>
+    <h2>🛒 Your Cart</h2>
 
-            <button onclick="addNumber('0')">0</button>
-            <button onclick="addDecimal()">.</button>
-            <button class="equal" onclick="calculate()">=</button>
+    <div id="cartItems">
+        <div class="empty">
+            Your cart is empty
+        </div>
+    </div>
+
+    <div class="total">
+        Total: ₦<span id="total">0</span>
+    </div>
+
+    <button class="order-btn" onclick="orderWhatsApp()">
+        📲 Order on WhatsApp
+    </button>
+
+</div>
+
+
+<!-- FEATURES -->
+
+<div class="features">
+
+    <div class="feature">
+        <h3>ℹ️ About</h3>
+        <p>Learn more about our drink store.</p>
+        <button onclick="openAbout()">Open</button>
+    </div>
+
+    <div class="feature">
+        <h3>📤 Share</h3>
+        <p>Share this website with friends.</p>
+        <button onclick="shareWebsite()">Share</button>
+    </div>
+
+    <div class="feature">
+        <h3>🧮 Calculator</h3>
+        <p>Calculate your drink cost.</p>
+        <button onclick="openCalculator()">Open</button>
+    </div>
+
+</div>
+
+</div>
+
+
+<!-- ABOUT MODAL -->
+
+<div class="modal" id="aboutModal">
+
+    <div class="modal-content">
+
+        <span class="close" onclick="closeAbout()">
+            &times;
+        </span>
+
+        <h2>About Raymond Drinks</h2>
+
+        <br>
+
+        <p>
+            Welcome to Raymond Drinks! 🥤
+        </p>
+
+        <br>
+
+        <p>
+            We provide refreshing drinks at affordable prices.
+            Choose your favorite drink, add it to your cart,
+            and send your order directly through WhatsApp.
+        </p>
+
+        <br>
+
+        <p>
+            Fast service • Affordable prices • Easy ordering
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- CALCULATOR MODAL -->
+
+<div class="modal" id="calculatorModal">
+
+    <div class="modal-content">
+
+        <span class="close" onclick="closeCalculator()">
+            &times;
+        </span>
+
+        <h2>🧮 Drink Calculator</h2>
+
+        <div class="calculator">
+
+            <input
+                type="number"
+                id="calcPrice"
+                placeholder="Price"
+            >
+
+            <input
+                type="number"
+                id="calcQty"
+                placeholder="Quantity"
+            >
+
+            <button onclick="calculatePrice()">
+                Calculate
+            </button>
+
+            <h3 style="margin-top:15px;">
+                Total: ₦<span id="calcResult">0</span>
+            </h3>
 
         </div>
 
     </div>
 
-</section>
+</div>
 
-<!-- ABOUT -->
-<section id="about" class="page">
-
-    <div class="card">
-
-        <h2>ℹ️ About</h2>
-
-        <p>
-            Welcome to Raymond's App.
-        </p>
-
-        <p>
-            This is a mobile-friendly website created to demonstrate
-            web design, programming and interactive features.
-        </p>
-
-        <p>
-            You can use the calculator, save your name and share this
-            website with other people.
-        </p>
-
-    </div>
-
-</section>
 
 <footer>
-    © 2026 Raymond's App
+
+    <p>© 2026 Raymond Drinks</p>
+    <p>Fresh drinks. Easy ordering. 🥤</p>
+
 </footer>
 
+
 <script>
-/* =========================
-   PAGE NAVIGATION
-========================= */
 
-function showPage(pageId) {
+let cart = [];
 
-    document.querySelectorAll(".page").forEach(function(page) {
-        page.classList.remove("active");
+
+/* ADD TO CART */
+
+function addToCart(name, price){
+
+    let existing = cart.find(item => item.name === name);
+
+    if(existing){
+
+        existing.quantity++;
+
+    }else{
+
+        cart.push({
+            name:name,
+            price:price,
+            quantity:1
+        });
+
+    }
+
+    displayCart();
+
+}
+
+
+/* DISPLAY CART */
+
+function displayCart(){
+
+    let cartItems = document.getElementById("cartItems");
+
+    cartItems.innerHTML = "";
+
+    if(cart.length === 0){
+
+        cartItems.innerHTML =
+        '<div class="empty">Your cart is empty</div>';
+
+        document.getElementById("total").innerText = "0";
+
+        return;
+    }
+
+    let total = 0;
+
+    cart.forEach((item,index)=>{
+
+        let itemTotal = item.price * item.quantity;
+
+        total += itemTotal;
+
+        let div = document.createElement("div");
+
+        div.className = "cart-item";
+
+        div.innerHTML = `
+
+            <div class="cart-info">
+
+                <strong>${item.name}</strong>
+
+                <br>
+
+                ₦${item.price.toLocaleString()}
+
+            </div>
+
+            <div class="qty">
+
+                <button onclick="decrease(${index})">
+                    -
+                </button>
+
+                <span>${item.quantity}</span>
+
+                <button onclick="increase(${index})">
+                    +
+                </button>
+
+            </div>
+
+        `;
+
+        cartItems.appendChild(div);
+
     });
 
-    const page = document.getElementById(pageId);
+    document.getElementById("total").innerText =
+        total.toLocaleString();
 
-    if (page) {
-        page.classList.add("active");
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
+}
+
+
+/* INCREASE */
+
+function increase(index){
+
+    cart[index].quantity++;
+
+    displayCart();
+
+}
+
+
+/* DECREASE */
+
+function decrease(index){
+
+    cart[index].quantity--;
+
+    if(cart[index].quantity <= 0){
+
+        cart.splice(index,1);
+
+    }
+
+    displayCart();
+
+}
+
+
+/* WHATSAPP ORDER */
+
+function orderWhatsApp(){
+
+    if(cart.length === 0){
+
+        alert("Please add a drink to your cart first.");
+
+        return;
+    }
+
+    let message =
+        "Hello Raymond Drinks! 🥤%0A%0AI want to order:%0A";
+
+    let total = 0;
+
+    cart.forEach(item => {
+
+        let itemTotal = item.price * item.quantity;
+
+        total += itemTotal;
+
+        message +=
+        `• ${item.name} x${item.quantity} = ₦${itemTotal.toLocaleString()}%0A`;
+
+    });
+
+    message +=
+        `%0ATotal: ₦${total.toLocaleString()}`;
+
+    /* CHANGE THIS NUMBER */
+
+    let phone = "2348012345678";
+
+    let url =
+        "https://wa.me/" + phone + "?text=" + message;
+
+    window.open(url,"_blank");
+
+}
+
+
+/* SEARCH */
+
+function searchDrinks(){
+
+    let input =
+        document.getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+    let cards =
+        document.querySelectorAll(".card");
+
+    cards.forEach(card => {
+
+        let name =
+            card.getAttribute("data-name");
+
+        if(name.includes(input)){
+
+            card.style.display = "block";
+
+        }else{
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+/* ABOUT */
+
+function openAbout(){
+
+    document.getElementById("aboutModal")
+    .style.display = "block";
+
+}
+
+
+function closeAbout(){
+
+    document.getElementById("aboutModal")
+    .style.display = "none";
+
+}
+
+
+/* CALCULATOR */
+
+function openCalculator(){
+
+    document.getElementById("calculatorModal")
+    .style.display = "block";
+
+}
+
+
+function closeCalculator(){
+
+    document.getElementById("calculatorModal")
+    .style.display = "none";
+
+}
+
+
+function calculatePrice(){
+
+    let price =
+        Number(document.getElementById("calcPrice").value);
+
+    let quantity =
+        Number(document.getElementById("calcQty").value);
+
+    if(price <= 0 || quantity <= 0){
+
+        alert("Please enter a valid price and quantity.");
+
+        return;
+    }
+
+    let result = price * quantity;
+
+    document.getElementById("calcResult").innerText =
+        result.toLocaleString();
+
+}
+
+
+/* SHARE WEBSITE */
+
+function shareWebsite(){
+
+    if(navigator.share){
+
+        navigator.share({
+
+            title:"Raymond Drinks",
+
+            text:"Check out Raymond Drinks 🥤",
+
+            url:window.location.href
+
         });
+
+    }else{
+
+        navigator.clipboard.writeText(
+            window.location.href
+        );
+
+        alert(
+            "Website link copied! You can now paste it anywhere."
+        );
+
     }
+
 }
 
 
-/* =========================
-   NAME
-========================= */
+/* CLOSE MODALS WHEN CLICKING OUTSIDE */
 
-function saveName() {
+window.onclick = function(event){
 
-    const input = document.getElementById("nameInput");
-    const name = input.value.trim();
+    let about =
+        document.getElementById("aboutModal");
 
-    if (name === "") {
-        alert("Please enter your name.");
-        return;
+    let calculator =
+        document.getElementById("calculatorModal");
+
+    if(event.target === about){
+
+        about.style.display = "none";
+
     }
 
-    localStorage.setItem("visitorName", name);
+    if(event.target === calculator){
 
-    document.getElementById("savedName").textContent =
-        "Welcome, " + name + "! 👋";
-}
+        calculator.style.display = "none";
 
-window.addEventListener("DOMContentLoaded", function() {
-
-    const savedName = localStorage.getItem("visitorName");
-
-    if (savedName) {
-        document.getElementById("nameInput").value = savedName;
-
-        document.getElementById("savedName").textContent =
-            "Welcome back, " + savedName + "! 👋";
     }
 
-});
-
-
-/* =========================
-   CALCULATOR
-========================= */
-
-let calculatorValue = "";
-let firstNumber = null;
-let currentOperator = null;
-let waitingForSecondNumber = false;
-
-function updateDisplay() {
-
-    const display = document.getElementById("display");
-
-    display.textContent =
-        calculatorValue === "" ? "0" : calculatorValue;
 }
 
 
-function addNumber(number) {
+/* START */
 
-    if (waitingForSecondNumber) {
-        calculatorValue = "";
-        waitingForSecondNumber = false;
-    }
+displayCart();
 
-    calculatorValue += number;
-
-    updateDisplay();
-}
-
-
-function addDecimal() {
-
-    if (waitingForSecondNumber) {
-        calculatorValue = "0";
-        waitingForSecondNumber = false;
-    }
-
-    if (!calculatorValue.includes(".")) {
-
-        if (calculatorValue === "") {
-            calculatorValue = "0";
-        }
-
-        calculatorValue += ".";
-    }
-
-    updateDisplay();
-}
-
-
-function chooseOperator(operator) {
-
-    if (calculatorValue === "") {
-        return;
-    }
-
-    if (firstNumber !== null && currentOperator !== null) {
-        calculate();
-    }
-
-    firstNumber = parseFloat(calculatorValue);
-    currentOperator = operator;
-    waitingForSecondNumber = true;
-}
-
-
-function calculate() {
-
-    if (
-        firstNumber === null ||
-        currentOperator === null ||
-        calculatorValue === ""
-    ) {
-        return;
-    }
-
-    const secondNumber = parseFloat(calculatorValue);
-
-    let result;
-
-    if (currentOperator === "+") {
-        result = firstNumber + secondNumber;
-    }
-
-    if (currentOperator === "-") {
-        result = firstNumber - secondNumber;
-    }
-
-    if (currentOperator === "*") {
-        result = firstNumber * secondNumber;
-    }
-
-    if (currentOperator === "/") {
-
-        if (secondNumber === 0) {
-            alert("Cannot divide by zero.");
-            clearCalculator();
-            return;
-        }
-
-        result = firstNumber / secondNumber;
-    }
-
-    if (currentOperator === "%") {
-        result = firstNumber % secondNumber;
-    }
-
-    calculatorValue = String(
-        Math.round(result * 100000000) / 100000000
-    );
-
-    firstNumber = null;
-    currentOperator = null;
-    waitingForSecondNumber = true;
-
-    updateDisplay();
-}
-
-
-function clearCalculator() {
-
-    calculatorValue = "";
-    firstNumber = null;
-    currentOperator = null;
-    waitingForSecondNumber = false;
-
-    updateDisplay();
-}
-
-
-function backspace() {
-
-    if (waitingForSecondNumber) {
-        return;
-    }
-
-    calculatorValue =
-        calculatorValue.slice(0, -1);
-
-    updateDisplay();
-}
-
-
-/* =========================
-   SHARE WEBSITE
-========================= */
-
-async function shareWebsite() {
-
-    const websiteURL = window.location.href;
-
-    if (navigator.share) {
-
-        try {
-
-            await navigator.share({
-                title: "Raymond's App",
-                text: "Check out my website!",
-                url: websiteURL
-            });
-
-        } catch (error) {
-            console.log("Share cancelled.");
-        }
-
-    } else {
-
-        try {
-
-            await navigator.clipboard.writeText(websiteURL);
-
-            alert(
-                "Website link copied! You can now paste it anywhere."
-            );
-
-        } catch (error) {
-
-            prompt(
-                "Copy your website link:",
-                websiteURL
-            );
-
-        }
-    }
-}
 </script>
 
 </body>
-</html>                  
+          </html>
