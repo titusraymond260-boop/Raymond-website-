@@ -4,271 +4,446 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Raymond Drinks</title>
+<title>Electronics | Smart Tech Store</title>
 
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    font-family:Arial, sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-body{
-    background:#f5f7fb;
-    color:#222;
+html {
+    scroll-behavior: smooth;
 }
 
-/* HEADER */
-header{
-    background:linear-gradient(135deg,#ff512f,#dd2476);
-    color:white;
-    padding:20px;
-    text-align:center;
-    position:sticky;
-    top:0;
-    z-index:100;
+body {
+    background: #080b12;
+    color: white;
 }
 
-header h1{
-    font-size:28px;
-    margin-bottom:6px;
+/* NAVBAR */
+nav {
+    width: 100%;
+    padding: 18px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(8,11,18,0.95);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #202633;
 }
 
-header p{
-    font-size:14px;
+.logo {
+    font-size: 25px;
+    font-weight: 800;
+    color: #00e5ff;
 }
 
-/* SEARCH */
-.search-box{
-    padding:15px;
-    background:white;
+.logo span {
+    color: white;
 }
 
-.search-box input{
-    width:100%;
-    padding:13px;
-    border:1px solid #ddd;
-    border-radius:10px;
-    font-size:15px;
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #ddd;
+    font-weight: 600;
+}
+
+nav ul li a:hover {
+    color: #00e5ff;
+}
+
+.nav-btn {
+    background: #00e5ff;
+    color: #001014;
+    padding: 10px 18px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* HERO */
+.hero {
+    min-height: 88vh;
+    padding: 70px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    background:
+        radial-gradient(circle at 80% 40%, rgba(0,229,255,0.18), transparent 35%),
+        radial-gradient(circle at 20% 80%, rgba(120,50,255,0.15), transparent 30%);
+}
+
+.hero-text {
+    max-width: 650px;
+}
+
+.hero-text small {
+    color: #00e5ff;
+    font-size: 15px;
+    letter-spacing: 3px;
+    font-weight: bold;
+}
+
+.hero-text h1 {
+    font-size: clamp(45px, 7vw, 85px);
+    line-height: 0.98;
+    margin: 20px 0;
+}
+
+.hero-text h1 span {
+    color: #00e5ff;
+}
+
+.hero-text p {
+    color: #aeb6c4;
+    font-size: 18px;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.primary-btn,
+.secondary-btn {
+    padding: 15px 25px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.primary-btn {
+    background: #00e5ff;
+    color: #001014;
+}
+
+.secondary-btn {
+    border: 1px solid #394250;
+    color: white;
+}
+
+.hero-card {
+    width: 360px;
+    height: 360px;
+    border-radius: 40px;
+    background: linear-gradient(145deg, #111925, #070a10);
+    border: 1px solid #283242;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 130px;
+    box-shadow: 0 0 70px rgba(0,229,255,0.12);
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+/* SECTION */
+section {
+    padding: 90px 7%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.section-title h2 {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.section-title p {
+    color: #9ca6b5;
+}
+
+/* CATEGORIES */
+.categories {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.category {
+    padding: 30px;
+    background: #10151f;
+    border: 1px solid #202938;
+    border-radius: 20px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.category:hover {
+    transform: translateY(-8px);
+    border-color: #00e5ff;
+}
+
+.category .icon {
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+.category h3 {
+    margin-bottom: 8px;
+}
+
+.category p {
+    color: #929cab;
 }
 
 /* PRODUCTS */
-.container{
-    padding:15px;
-    max-width:1000px;
-    margin:auto;
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
 }
 
-.products{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-    gap:15px;
+.product {
+    background: #10151f;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid #202938;
+    transition: 0.3s;
 }
 
-.card{
-    background:white;
-    border-radius:15px;
-    padding:15px;
-    box-shadow:0 4px 12px rgba(0,0,0,.08);
-    text-align:center;
+.product:hover {
+    transform: translateY(-8px);
+    border-color: #00e5ff;
 }
 
-.drink-img{
-    font-size:55px;
-    margin-bottom:10px;
+.product-image {
+    height: 190px;
+    background: linear-gradient(135deg, #18202c, #080c13);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 75px;
 }
 
-.card h3{
-    margin-bottom:5px;
+.product-info {
+    padding: 20px;
 }
 
-.price{
-    color:#e91e63;
-    font-weight:bold;
-    margin:8px 0;
+.product-info h3 {
+    margin-bottom: 8px;
 }
 
-.card button{
-    background:#ff416c;
-    color:white;
-    border:none;
-    padding:10px 15px;
-    border-radius:8px;
-    cursor:pointer;
-    width:100%;
+.product-info p {
+    color: #8f99a8;
+    font-size: 14px;
+    margin-bottom: 15px;
 }
 
-.card button:active{
-    transform:scale(.97);
+.price {
+    color: #00e5ff;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
 }
 
-/* CART */
-.cart{
-    background:white;
-    margin-top:20px;
-    padding:18px;
-    border-radius:15px;
-    box-shadow:0 4px 12px rgba(0,0,0,.08);
+.buy-btn {
+    display: block;
+    text-align: center;
+    padding: 11px;
+    background: #00e5ff;
+    color: #001014;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
 }
 
-.cart h2{
-    margin-bottom:15px;
+/* DEAL */
+.deal {
+    background: linear-gradient(120deg, #00e5ff, #5b4cff);
+    color: #05070b;
+    border-radius: 30px;
+    padding: 55px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
 }
 
-.cart-item{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    border-bottom:1px solid #eee;
-    padding:12px 0;
-    gap:10px;
+.deal h2 {
+    font-size: 42px;
+    margin-bottom: 10px;
 }
 
-.cart-info{
-    flex:1;
+.deal p {
+    font-size: 17px;
 }
 
-.qty{
-    display:flex;
-    align-items:center;
-    gap:7px;
+.deal-btn {
+    background: #05070b;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    white-space: nowrap;
 }
 
-.qty button{
-    border:none;
-    background:#eee;
-    width:30px;
-    height:30px;
-    border-radius:6px;
-    font-weight:bold;
+/* WHY US */
+.features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
 }
 
-.total{
-    font-size:20px;
-    font-weight:bold;
-    margin-top:15px;
+.feature {
+    padding: 30px;
+    background: #10151f;
+    border-radius: 20px;
+    border: 1px solid #202938;
 }
 
-.order-btn{
-    width:100%;
-    padding:14px;
-    border:none;
-    border-radius:10px;
-    background:#25D366;
-    color:white;
-    font-size:16px;
-    font-weight:bold;
-    margin-top:15px;
+.feature-icon {
+    font-size: 35px;
+    margin-bottom: 15px;
 }
 
-/* FEATURES */
-.features{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-    gap:12px;
-    margin-top:20px;
+.feature p {
+    color: #939dac;
+    line-height: 1.6;
+    margin-top: 10px;
 }
 
-.feature{
-    background:white;
-    padding:18px;
-    text-align:center;
-    border-radius:12px;
-    box-shadow:0 3px 10px rgba(0,0,0,.06);
+/* CONTACT */
+.contact {
+    text-align: center;
+    background: #0d121a;
 }
 
-.feature button{
-    margin-top:10px;
-    padding:9px 12px;
-    border:none;
-    border-radius:7px;
-    background:#333;
-    color:white;
+.contact h2 {
+    font-size: 45px;
+    margin-bottom: 15px;
 }
 
-/* MODAL */
-.modal{
-    display:none;
-    position:fixed;
-    z-index:200;
-    left:0;
-    top:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,.6);
-    padding:30px 15px;
+.contact p {
+    color: #a2aab7;
+    margin-bottom: 30px;
 }
 
-.modal-content{
-    background:white;
-    max-width:500px;
-    margin:auto;
-    padding:25px;
-    border-radius:15px;
-}
-
-.close{
-    float:right;
-    font-size:25px;
-    cursor:pointer;
-}
-
-/* CALCULATOR */
-.calculator{
-    margin-top:15px;
-}
-
-.calculator input{
-    width:100%;
-    padding:12px;
-    margin:5px 0;
-    border:1px solid #ddd;
-    border-radius:8px;
-}
-
-.calculator button{
-    width:100%;
-    padding:12px;
-    border:none;
-    background:#ff416c;
-    color:white;
-    border-radius:8px;
-    margin-top:5px;
+.contact-btn {
+    display: inline-block;
+    padding: 15px 30px;
+    background: #00e5ff;
+    color: #001014;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
 }
 
 /* FOOTER */
-footer{
-    text-align:center;
-    padding:25px 15px;
-    margin-top:30px;
-    background:#222;
-    color:white;
-    font-size:14px;
+footer {
+    text-align: center;
+    padding: 30px;
+    border-top: 1px solid #202633;
+    color: #7f8998;
 }
 
-.empty{
-    color:#777;
-    text-align:center;
-    padding:15px;
+/* MOBILE */
+@media(max-width: 900px) {
+
+    nav ul {
+        display: none;
+    }
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 60px;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .hero-card {
+        width: 280px;
+        height: 280px;
+        font-size: 100px;
+    }
+
+    .categories {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+    }
+
+    .deal {
+        flex-direction: column;
+        text-align: center;
+    }
 }
 
-/* SMALL PHONES */
-@media(max-width:400px){
-    header h1{
-        font-size:24px;
+@media(max-width: 550px) {
+
+    section {
+        padding: 65px 5%;
     }
 
-    .products{
-        grid-template-columns:repeat(2,1fr);
+    .hero {
+        padding-left: 5%;
+        padding-right: 5%;
     }
 
-    .card{
-        padding:10px;
+    .hero-text h1 {
+        font-size: 48px;
     }
 
-    .drink-img{
-        font-size:45px;
+    .hero-text p {
+        font-size: 16px;
+    }
+
+    .categories,
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-title h2 {
+        font-size: 32px;
+    }
+
+    .deal {
+        padding: 35px 20px;
+    }
+
+    .deal h2 {
+        font-size: 32px;
+    }
+
+    .contact h2 {
+        font-size: 34px;
     }
 }
 </style>
@@ -276,556 +451,444 @@ footer{
 
 <body>
 
-<header>
-    <h1>🥤 Raymond Drinks</h1>
-    <p>Fresh drinks delivered to you</p>
-</header>
+<!-- NAVBAR -->
+<nav>
 
-<div class="search-box">
-    <input 
-        type="text" 
-        id="searchInput"
-        placeholder="🔍 Search for a drink..."
-        onkeyup="searchDrinks()"
-    >
-</div>
-
-<div class="container">
-
-<h2 style="margin-bottom:15px;">Our Drinks</h2>
-
-<div class="products" id="products">
-
-    <div class="card" data-name="coca cola">
-        <div class="drink-img">🥤</div>
-        <h3>Coca Cola</h3>
-        <div class="price">₦800</div>
-        <button onclick="addToCart('Coca Cola',800)">
-            Add to Cart
-        </button>
+    <div class="logo">
+        ELEC<span>TRONICS</span>
     </div>
 
-    <div class="card" data-name="pepsi">
-        <div class="drink-img">🥤</div>
-        <h3>Pepsi</h3>
-        <div class="price">₦700</div>
-        <button onclick="addToCart('Pepsi',700)">
-            Add to Cart
-        </button>
-    </div>
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#categories">Categories</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
 
-    <div class="card" data-name="sprite">
-        <div class="drink-img">🥤</div>
-        <h3>Sprite</h3>
-        <div class="price">₦700</div>
-        <button onclick="addToCart('Sprite',700)">
-            Add to Cart
-        </button>
-    </div>
+    <a class="nav-btn" href="#products">
+        Shop Now
+    </a>
 
-    <div class="card" data-name="fanta">
-        <div class="drink-img">🍊</div>
-        <h3>Fanta</h3>
-        <div class="price">₦700</div>
-        <button onclick="addToCart('Fanta',700)">
-            Add to Cart
-        </button>
-    </div>
+</nav>
 
-    <div class="card" data-name="malt">
-        <div class="drink-img">🍺</div>
-        <h3>Malt</h3>
-        <div class="price">₦1,000</div>
-        <button onclick="addToCart('Malt',1000)">
-            Add to Cart
-        </button>
-    </div>
 
-    <div class="card" data-name="water">
-        <div class="drink-img">💧</div>
-        <h3>Bottled Water</h3>
-        <div class="price">₦500</div>
-        <button onclick="addToCart('Bottled Water',500)">
-            Add to Cart
-        </button>
-    </div>
+<!-- HERO -->
+<section class="hero" id="home">
 
-    <div class="card" data-name="juice">
-        <div class="drink-img">🧃</div>
-        <h3>Fruit Juice</h3>
-        <div class="price">₦1,500</div>
-        <button onclick="addToCart('Fruit Juice',1500)">
-            Add to Cart
-        </button>
-    </div>
+    <div class="hero-text">
 
-    <div class="card" data-name="energy drink">
-        <div class="drink-img">⚡</div>
-        <h3>Energy Drink</h3>
-        <div class="price">₦1,500</div>
-        <button onclick="addToCart('Energy Drink',1500)">
-            Add to Cart
-        </button>
-    </div>
+        <small>WELCOME TO THE FUTURE</small>
 
-</div>
+        <h1>
+            Technology<br>
+            That Makes<br>
+            Life <span>Better.</span>
+        </h1>
 
-<!-- CART -->
+        <p>
+            Discover quality electronics, smart gadgets and everyday
+            technology designed to make your life easier, smarter and better.
+        </p>
 
-<div class="cart">
+        <div class="hero-buttons">
 
-    <h2>🛒 Your Cart</h2>
+            <a href="#products" class="primary-btn">
+                Explore Products
+            </a>
 
-    <div id="cartItems">
-        <div class="empty">
-            Your cart is empty
+            <a href="#contact" class="secondary-btn">
+                Contact Us
+            </a>
+
         </div>
+
     </div>
 
-    <div class="total">
-        Total: ₦<span id="total">0</span>
+
+    <div class="hero-card">
+        ⚡
     </div>
 
-    <button class="order-btn" onclick="orderWhatsApp()">
-        📲 Order on WhatsApp
-    </button>
-
-</div>
+</section>
 
 
-<!-- FEATURES -->
+<!-- CATEGORIES -->
+<section id="categories">
 
-<div class="features">
+    <div class="section-title">
 
-    <div class="feature">
-        <h3>ℹ️ About</h3>
-        <p>Learn more about our drink store.</p>
-        <button onclick="openAbout()">Open</button>
-    </div>
-
-    <div class="feature">
-        <h3>📤 Share</h3>
-        <p>Share this website with friends.</p>
-        <button onclick="shareWebsite()">Share</button>
-    </div>
-
-    <div class="feature">
-        <h3>🧮 Calculator</h3>
-        <p>Calculate your drink cost.</p>
-        <button onclick="openCalculator()">Open</button>
-    </div>
-
-</div>
-
-</div>
-
-
-<!-- ABOUT MODAL -->
-
-<div class="modal" id="aboutModal">
-
-    <div class="modal-content">
-
-        <span class="close" onclick="closeAbout()">
-            &times;
-        </span>
-
-        <h2>About Raymond Drinks</h2>
-
-        <br>
+        <h2>Shop by Category</h2>
 
         <p>
-            Welcome to Raymond Drinks! 🥤
-        </p>
-
-        <br>
-
-        <p>
-            We provide refreshing drinks at affordable prices.
-            Choose your favorite drink, add it to your cart,
-            and send your order directly through WhatsApp.
-        </p>
-
-        <br>
-
-        <p>
-            Fast service • Affordable prices • Easy ordering
+            Everything you need, all in one place.
         </p>
 
     </div>
 
-</div>
+
+    <div class="categories">
+
+        <div class="category">
+
+            <div class="icon">📱</div>
+
+            <h3>Phones</h3>
+
+            <p>
+                Smartphones and accessories
+            </p>
+
+        </div>
 
 
-<!-- CALCULATOR MODAL -->
+        <div class="category">
 
-<div class="modal" id="calculatorModal">
+            <div class="icon">💻</div>
 
-    <div class="modal-content">
+            <h3>Laptops</h3>
 
-        <span class="close" onclick="closeCalculator()">
-            &times;
-        </span>
+            <p>
+                Powerful devices for work
+            </p>
 
-        <h2>🧮 Drink Calculator</h2>
+        </div>
 
-        <div class="calculator">
 
-            <input
-                type="number"
-                id="calcPrice"
-                placeholder="Price"
-            >
+        <div class="category">
 
-            <input
-                type="number"
-                id="calcQty"
-                placeholder="Quantity"
-            >
+            <div class="icon">🎧</div>
 
-            <button onclick="calculatePrice()">
-                Calculate
-            </button>
+            <h3>Audio</h3>
 
-            <h3 style="margin-top:15px;">
-                Total: ₦<span id="calcResult">0</span>
+            <p>
+                Headphones and speakers
+            </p>
+
+        </div>
+
+
+        <div class="category">
+
+            <div class="icon">⌚</div>
+
+            <h3>Smart Gadgets</h3>
+
+            <p>
+                Technology for modern life
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PRODUCTS -->
+<section id="products">
+
+    <div class="section-title">
+
+        <h2>Featured Products</h2>
+
+        <p>
+            Popular tech picks for our customers.
+        </p>
+
+    </div>
+
+
+    <div class="product-grid">
+
+
+        <!-- PRODUCT 1 -->
+
+        <div class="product">
+
+            <div class="product-image">
+                📱
+            </div>
+
+            <div class="product-info">
+
+                <h3>
+                    Premium Smartphone
+                </h3>
+
+                <p>
+                    Fast, stylish and powerful.
+                </p>
+
+                <div class="price">
+                    ₦250,000
+                </div>
+
+                <a
+                    class="buy-btn"
+                    href="https://wa.me/2349034338376?text=Hello%20I%20want%20to%20buy%20the%20Premium%20Smartphone"
+                    target="_blank">
+
+                    Order Now
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 2 -->
+
+        <div class="product">
+
+            <div class="product-image">
+                💻
+            </div>
+
+            <div class="product-info">
+
+                <h3>
+                    Pro Laptop
+                </h3>
+
+                <p>
+                    Perfect for work and school.
+                </p>
+
+                <div class="price">
+                    ₦650,000
+                </div>
+
+                <a
+                    class="buy-btn"
+                    href="https://wa.me/2349034338376?text=Hello%20I%20want%20to%20buy%20the%20Pro%20Laptop"
+                    target="_blank">
+
+                    Order Now
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 3 -->
+
+        <div class="product">
+
+            <div class="product-image">
+                🎧
+            </div>
+
+            <div class="product-info">
+
+                <h3>
+                    Wireless Headphones
+                </h3>
+
+                <p>
+                    Clear sound with deep bass.
+                </p>
+
+                <div class="price">
+                    ₦45,000
+                </div>
+
+                <a
+                    class="buy-btn"
+                    href="https://wa.me/2349034338376?text=Hello%20I%20want%20to%20buy%20the%20Wireless%20Headphones"
+                    target="_blank">
+
+                    Order Now
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 4 -->
+
+        <div class="product">
+
+            <div class="product-image">
+                ⌚
+            </div>
+
+            <div class="product-info">
+
+                <h3>
+                    Smart Watch
+                </h3>
+
+                <p>
+                    Smart features on your wrist.
+                </p>
+
+                <div class="price">
+                    ₦75,000
+                </div>
+
+                <a
+                    class="buy-btn"
+                    href="https://wa.me/2349034338376?text=Hello%20I%20want%20to%20buy%20the%20Smart%20Watch"
+                    target="_blank">
+
+                    Order Now
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- HOT DEAL -->
+<section>
+
+    <div class="deal">
+
+        <div>
+
+            <h2>
+                🔥 Hot Tech Deals
+            </h2>
+
+            <p>
+                Get amazing prices on selected electronics
+                while stock lasts.
+            </p>
+
+        </div>
+
+
+        <a href="#products" class="deal-btn">
+            View Deals
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- WHY US -->
+<section>
+
+    <div class="section-title">
+
+        <h2>
+            Why Shop With Us?
+        </h2>
+
+        <p>
+            We don't just sell gadgets.
+            We help you choose the right technology.
+        </p>
+
+    </div>
+
+
+    <div class="features">
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                ✅
+            </div>
+
+            <h3>
+                Quality Products
             </h3>
 
+            <p>
+                Carefully selected electronics you can
+                confidently use every day.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                🚚
+            </div>
+
+            <h3>
+                Fast Delivery
+            </h3>
+
+            <p>
+                Get your order delivered quickly and conveniently.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                🤝
+            </div>
+
+            <h3>
+                Customer Support
+            </h3>
+
+            <p>
+                Need help choosing a product?
+                We're here to help.
+            </p>
+
         </div>
 
     </div>
 
-</div>
+</section>
 
 
+<!-- CONTACT -->
+<section class="contact" id="contact">
+
+    <h2>
+        Ready to Upgrade?
+    </h2>
+
+    <p>
+        Find the right technology for your lifestyle today.
+    </p>
+
+    <a
+        class="contact-btn"
+        href="https://wa.me/2349034338376?text=Hello%20I%20want%20to%20know%20more%20about%20your%20electronics"
+        target="_blank">
+
+        💬 Chat With Us on WhatsApp
+
+    </a>
+
+</section>
+
+
+<!-- FOOTER -->
 <footer>
 
-    <p>© 2026 Raymond Drinks</p>
-    <p>Fresh drinks. Easy ordering. 🥤</p>
+    <p>
+        © 2026 Electronics. All Rights Reserved.
+    </p>
+
+    <p style="margin-top:8px;">
+        Smart technology. Better living.
+    </p>
 
 </footer>
 
-
-<script>
-
-let cart = [];
-
-
-/* ADD TO CART */
-
-function addToCart(name, price){
-
-    let existing = cart.find(item => item.name === name);
-
-    if(existing){
-
-        existing.quantity++;
-
-    }else{
-
-        cart.push({
-            name:name,
-            price:price,
-            quantity:1
-        });
-
-    }
-
-    displayCart();
-
-}
-
-
-/* DISPLAY CART */
-
-function displayCart(){
-
-    let cartItems = document.getElementById("cartItems");
-
-    cartItems.innerHTML = "";
-
-    if(cart.length === 0){
-
-        cartItems.innerHTML =
-        '<div class="empty">Your cart is empty</div>';
-
-        document.getElementById("total").innerText = "0";
-
-        return;
-    }
-
-    let total = 0;
-
-    cart.forEach((item,index)=>{
-
-        let itemTotal = item.price * item.quantity;
-
-        total += itemTotal;
-
-        let div = document.createElement("div");
-
-        div.className = "cart-item";
-
-        div.innerHTML = `
-
-            <div class="cart-info">
-
-                <strong>${item.name}</strong>
-
-                <br>
-
-                ₦${item.price.toLocaleString()}
-
-            </div>
-
-            <div class="qty">
-
-                <button onclick="decrease(${index})">
-                    -
-                </button>
-
-                <span>${item.quantity}</span>
-
-                <button onclick="increase(${index})">
-                    +
-                </button>
-
-            </div>
-
-        `;
-
-        cartItems.appendChild(div);
-
-    });
-
-    document.getElementById("total").innerText =
-        total.toLocaleString();
-
-}
-
-
-/* INCREASE */
-
-function increase(index){
-
-    cart[index].quantity++;
-
-    displayCart();
-
-}
-
-
-/* DECREASE */
-
-function decrease(index){
-
-    cart[index].quantity--;
-
-    if(cart[index].quantity <= 0){
-
-        cart.splice(index,1);
-
-    }
-
-    displayCart();
-
-}
-
-
-/* WHATSAPP ORDER */
-
-function orderWhatsApp(){
-
-    if(cart.length === 0){
-
-        alert("Please add a drink to your cart first.");
-
-        return;
-    }
-
-    let message =
-        "Hello Raymond Drinks! 🥤%0A%0AI want to order:%0A";
-
-    let total = 0;
-
-    cart.forEach(item => {
-
-        let itemTotal = item.price * item.quantity;
-
-        total += itemTotal;
-
-        message +=
-        `• ${item.name} x${item.quantity} = ₦${itemTotal.toLocaleString()}%0A`;
-
-    });
-
-    message +=
-        `%0ATotal: ₦${total.toLocaleString()}`;
-
-    /* CHANGE THIS NUMBER */
-
-    let phone = "09034338376";
-
-    let url =
-        "https://wa.me/" + phone + "?text=" + message;
-
-    window.open(url,"_blank");
-
-}
-
-
-/* SEARCH */
-
-function searchDrinks(){
-
-    let input =
-        document.getElementById("searchInput")
-        .value
-        .toLowerCase();
-
-    let cards =
-        document.querySelectorAll(".card");
-
-    cards.forEach(card => {
-
-        let name =
-            card.getAttribute("data-name");
-
-        if(name.includes(input)){
-
-            card.style.display = "block";
-
-        }else{
-
-            card.style.display = "none";
-
-        }
-
-    });
-
-}
-
-
-/* ABOUT */
-
-function openAbout(){
-
-    document.getElementById("aboutModal")
-    .style.display = "block";
-
-}
-
-
-function closeAbout(){
-
-    document.getElementById("aboutModal")
-    .style.display = "none";
-
-}
-
-
-/* CALCULATOR */
-
-function openCalculator(){
-
-    document.getElementById("calculatorModal")
-    .style.display = "block";
-
-}
-
-
-function closeCalculator(){
-
-    document.getElementById("calculatorModal")
-    .style.display = "none";
-
-}
-
-
-function calculatePrice(){
-
-    let price =
-        Number(document.getElementById("calcPrice").value);
-
-    let quantity =
-        Number(document.getElementById("calcQty").value);
-
-    if(price <= 0 || quantity <= 0){
-
-        alert("Please enter a valid price and quantity.");
-
-        return;
-    }
-
-    let result = price * quantity;
-
-    document.getElementById("calcResult").innerText =
-        result.toLocaleString();
-
-}
-
-
-/* SHARE WEBSITE */
-
-function shareWebsite(){
-
-    if(navigator.share){
-
-        navigator.share({
-
-            title:"Raymond Drinks",
-
-            text:"Check out Raymond Drinks 🥤",
-
-            url:window.location.href
-
-        });
-
-    }else{
-
-        navigator.clipboard.writeText(
-            window.location.href
-        );
-
-        alert(
-            "Website link copied! You can now paste it anywhere."
-        );
-
-    }
-
-}
-
-
-/* CLOSE MODALS WHEN CLICKING OUTSIDE */
-
-window.onclick = function(event){
-
-    let about =
-        document.getElementById("aboutModal");
-
-    let calculator =
-        document.getElementById("calculatorModal");
-
-    if(event.target === about){
-
-        about.style.display = "none";
-
-    }
-
-    if(event.target === calculator){
-
-        calculator.style.display = "none";
-
-    }
-
-}
-
-
-/* START */
-
-displayCart();
-
-</script>
-
 </body>
-          </html>
+    </html>
