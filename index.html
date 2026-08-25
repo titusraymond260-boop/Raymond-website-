@@ -3,314 +3,271 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RayTech Demo Bank</title>
+<title>Ray Wallet</title>
 
 <style>
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
 }
 
 body {
-    background: #f2f5f9;
-    color: #172033;
+    font-family: Arial, sans-serif;
+    background: #f3f5f8;
+    color: #17202a;
+    min-height: 100vh;
 }
 
 /* LOGIN */
+
 .login-page {
     min-height: 100vh;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     padding: 20px;
 }
 
 .login-box {
     width: 100%;
-    max-width: 400px;
+    max-width: 420px;
     background: white;
-    padding: 35px 25px;
-    border-radius: 18px;
-    box-shadow: 0 10px 35px rgba(0,0,0,.12);
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.10);
 }
 
 .logo {
-    text-align: center;
-    margin-bottom: 25px;
-}
-
-.logo h1 {
-    color: #0757d5;
-    font-size: 30px;
-}
-
-.logo p {
-    color: #777;
-    margin-top: 6px;
-    font-size: 14px;
-}
-
-.demo-warning {
-    background: #fff3cd;
-    color: #856404;
-    padding: 12px;
-    border-radius: 10px;
-    font-size: 13px;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.input-group {
-    margin-bottom: 16px;
-}
-
-.input-group label {
-    display: block;
-    margin-bottom: 7px;
-    font-size: 14px;
+    width: 65px;
+    height: 65px;
+    background: #111827;
+    color: white;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
     font-weight: bold;
+    margin-bottom: 20px;
 }
 
-.input-group input,
-.input-group select {
+.login-box h1 {
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #718096;
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin: 18px 0 8px;
+}
+
+input {
     width: 100%;
-    padding: 13px;
-    border: 1px solid #d5dbe5;
-    border-radius: 9px;
+    padding: 15px;
+    border: 1px solid #d5dbe3;
+    border-radius: 10px;
+    font-size: 16px;
     outline: none;
-    font-size: 15px;
 }
 
-.input-group input:focus,
-.input-group select:focus {
-    border-color: #0757d5;
+input:focus {
+    border-color: #111827;
 }
 
-button {
+.login-button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 25px;
     border: none;
+    border-radius: 10px;
+    background: #111827;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
 }
 
-.primary-btn {
-    width: 100%;
-    padding: 14px;
-    background: #0757d5;
-    color: white;
-    border-radius: 9px;
-    font-size: 16px;
-    font-weight: bold;
+.login-button:hover {
+    opacity: 0.9;
 }
 
-.primary-btn:hover {
-    background: #0648af;
-}
-
-.login-info {
+#message {
     text-align: center;
-    margin-top: 18px;
-    font-size: 13px;
-    color: #777;
+    margin-top: 15px;
+    min-height: 20px;
 }
 
-/* APP */
-.app {
+.error {
+    color: #d62828;
+}
+
+.success {
+    color: #16803c;
+}
+
+.demo {
+    margin-top: 25px;
+    padding: 15px;
+    border-radius: 10px;
+    background: #f4f6f8;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* DASHBOARD */
+
+#dashboard {
     display: none;
-    min-height: 100vh;
+}
+
+.dashboard {
+    width: min(900px, 94%);
+    margin: auto;
+    padding: 25px 0;
 }
 
 .topbar {
-    background: #0757d5;
-    color: white;
-    padding: 18px 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.topbar h2 {
-    font-size: 21px;
-}
-
-.logout {
-    background: rgba(255,255,255,.15);
-    color: white;
-    padding: 9px 14px;
-    border-radius: 7px;
-}
-
-/* CONTENT */
-.container {
-    max-width: 1100px;
-    margin: auto;
-    padding: 25px 18px 50px;
-}
-
-.welcome {
-    margin-bottom: 20px;
-}
-
-.welcome h2 {
-    font-size: 25px;
-}
-
-.welcome p {
-    color: #777;
-    margin-top: 5px;
-}
-
-/* BALANCE */
-.balance-card {
-    background: linear-gradient(135deg, #0757d5, #07358d);
-    color: white;
-    padding: 28px;
-    border-radius: 18px;
-    margin-bottom: 20px;
-    box-shadow: 0 10px 25px rgba(7,87,213,.25);
-}
-
-.balance-card small {
-    opacity: .8;
-}
-
-.balance {
-    font-size: 36px;
-    font-weight: bold;
-    margin: 10px 0;
-}
-
-.account-number {
-    font-size: 13px;
-    opacity: .8;
-}
-
-/* ACTIONS */
-.actions {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
     margin-bottom: 25px;
 }
 
-.action-btn {
-    background: white;
-    padding: 18px 10px;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,.06);
-    font-weight: bold;
-    color: #172033;
-}
-
-.action-btn span {
-    display: block;
-    font-size: 25px;
-    margin-bottom: 7px;
-}
-
-/* PANELS */
-.panel {
-    background: white;
-    padding: 22px;
-    border-radius: 15px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,.05);
-}
-
-.panel h3 {
-    margin-bottom: 17px;
-}
-
-/* TRANSACTIONS */
-.transaction {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 0;
-    border-bottom: 1px solid #edf0f4;
-}
-
-.transaction:last-child {
-    border-bottom: none;
-}
-
-.transaction-name {
-    font-weight: bold;
-}
-
-.transaction-date {
-    font-size: 12px;
-    color: #888;
-    margin-top: 4px;
-}
-
-.credit {
-    color: #0a9b55;
-    font-weight: bold;
-}
-
-.debit {
-    color: #d52b2b;
-    font-weight: bold;
-}
-
-/* MODAL */
-.modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,.55);
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    z-index: 20;
-}
-
-.modal-box {
-    background: white;
-    width: 100%;
-    max-width: 420px;
-    padding: 25px;
-    border-radius: 16px;
-}
-
-.modal-box h3 {
-    margin-bottom: 20px;
-}
-
-.close {
-    background: #eee;
-    padding: 12px;
-    width: 100%;
-    margin-top: 10px;
-    border-radius: 8px;
-}
-
-.message {
-    margin-bottom: 15px;
-    padding: 11px;
-    border-radius: 8px;
-    display: none;
+.welcome {
+    color: #718096;
     font-size: 14px;
 }
 
+.topbar h2 {
+    margin-top: 5px;
+}
+
+.logout {
+    border: none;
+    background: #e9edf2;
+    padding: 10px 18px;
+    border-radius: 9px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.balance {
+    background: #111827;
+    color: white;
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 25px;
+}
+
+.balance p {
+    opacity: .7;
+}
+
+.balance h1 {
+    font-size: 38px;
+    margin: 12px 0;
+}
+
+.balance span {
+    opacity: .65;
+}
+
+.actions {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.action {
+    background: white;
+    border: none;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: left;
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgba(0,0,0,.05);
+}
+
+.action:hover {
+    transform: translateY(-2px);
+}
+
+.action-icon {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.action strong,
+.action small {
+    display: block;
+}
+
+.action small {
+    margin-top: 5px;
+    color: #718096;
+}
+
+.transactions {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+}
+
+.transactions h2 {
+    margin-bottom: 10px;
+}
+
+.transaction {
+    display: flex;
+    justify-content: space-between;
+    padding: 18px 0;
+    border-bottom: 1px solid #edf0f3;
+}
+
+.transaction small {
+    display: block;
+    color: #718096;
+    margin-top: 5px;
+}
+
+.credit {
+    color: #16803c;
+}
+
+.debit {
+    color: #d62828;
+}
+
+.footer {
+    text-align: center;
+    color: #87909c;
+    margin-top: 30px;
+    font-size: 13px;
+}
+
 /* MOBILE */
-@media(max-width:700px) {
+
+@media (max-width: 650px) {
+
+    .login-box {
+        padding: 25px;
+    }
+
     .actions {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .balance {
+    .balance h1 {
         font-size: 30px;
-    }
-
-    .topbar {
-        padding: 16px;
-    }
-
-    .container {
-        padding: 20px 14px;
     }
 }
 </style>
@@ -319,257 +276,252 @@ button {
 <body>
 
 <!-- LOGIN PAGE -->
-<section class="login-page" id="loginPage">
+
+<div class="login-page" id="loginPage">
 
     <div class="login-box">
 
-        <div class="logo">
-            <h1>RayTech Bank</h1>
-            <p>Digital Banking Demo</p>
-        </div>
+        <div class="logo">R</div>
 
-        <div class="demo-warning">
-            ⚠️ DEMO SYSTEM — No real money is processed.
-        </div>
+        <h1>Ray Wallet</h1>
 
-        <div id="loginMessage" class="message"></div>
+        <p class="subtitle">
+            Secure personal wallet
+        </p>
 
-        <div class="input-group">
-            <label>Email</label>
-            <input type="email" id="loginEmail"
-                   placeholder="Enter your email">
-        </div>
+        <form id="loginForm">
 
-        <div class="input-group">
-            <label>Password</label>
-            <input type="password" id="loginPassword"
-                   placeholder="Enter password">
-        </div>
+            <label for="username">
+                Username
+            </label>
 
-        <button class="primary-btn" onclick="login()">
-            Login
-        </button>
+            <input
+                type="text"
+                id="username"
+                placeholder="Enter username"
+                autocomplete="username"
+                required
+            >
 
-        <div class="login-info">
-            Demo login:<br>
-            Email: demo@raytechbank.test<br>
-            Password: 123456
+            <label for="password">
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter password"
+                autocomplete="current-password"
+                required
+            >
+
+            <button
+                type="submit"
+                class="login-button"
+                id="loginButton"
+            >
+                Login
+            </button>
+
+            <p id="message"></p>
+
+        </form>
+
+        <div class="demo">
+            <strong>Demo login</strong><br>
+            Username: raymond<br>
+            Password: 1234
         </div>
 
     </div>
-</section>
+
+</div>
 
 
-<!-- BANK APP -->
-<section class="app" id="bankApp">
+<!-- DASHBOARD -->
 
-    <header class="topbar">
-        <h2>RayTech Bank</h2>
+<div id="dashboard">
 
-        <button class="logout" onclick="logout()">
-            Logout
-        </button>
-    </header>
+    <div class="dashboard">
 
+        <div class="topbar">
 
-    <main class="container">
+            <div>
+                <div class="welcome">
+                    Welcome back
+                </div>
 
-        <div class="welcome">
-            <h2>Welcome, Raymond 👋</h2>
-            <p>Your demo banking dashboard</p>
-        </div>
-
-
-        <!-- BALANCE -->
-        <div class="balance-card">
-
-            <small>Available Balance</small>
-
-            <div class="balance" id="balance">
-                ₦50,000.00
+                <h2 id="displayName">
+                    Raymond
+                </h2>
             </div>
 
-            <div class="account-number">
-                Account No: 1029384756
-            </div>
+            <button
+                class="logout"
+                id="logoutButton"
+            >
+                Logout
+            </button>
 
         </div>
 
 
-        <!-- ACTION BUTTONS -->
+        <div class="balance">
+
+            <p>Demo Balance</p>
+
+            <h1>
+                ₦250,000.00
+            </h1>
+
+            <span>
+                Personal wallet
+            </span>
+
+        </div>
+
+
         <div class="actions">
 
-            <button class="action-btn"
-                    onclick="openModal('depositModal')">
-                <span>💰</span>
-                Deposit
+            <button class="action" onclick="demoAction('Fund')">
+
+                <div class="action-icon">
+                    ＋
+                </div>
+
+                <strong>
+                    Fund
+                </strong>
+
+                <small>
+                    Add demo funds
+                </small>
+
             </button>
 
-            <button class="action-btn"
-                    onclick="openModal('withdrawModal')">
-                <span>🏧</span>
-                Withdraw
+
+            <button class="action" onclick="demoAction('Send')">
+
+                <div class="action-icon">
+                    ↗
+                </div>
+
+                <strong>
+                    Send
+                </strong>
+
+                <small>
+                    Demo transfer
+                </small>
+
             </button>
 
-            <button class="action-btn"
-                    onclick="openModal('transferModal')">
-                <span>💸</span>
-                Transfer
+
+            <button class="action" onclick="demoAction('Withdraw')">
+
+                <div class="action-icon">
+                    ↙
+                </div>
+
+                <strong>
+                    Withdraw
+                </strong>
+
+                <small>
+                    Demo withdrawal
+                </small>
+
             </button>
 
-            <button class="action-btn"
-                    onclick="showTransactions()">
-                <span>📜</span>
-                History
+
+            <button class="action" onclick="demoAction('History')">
+
+                <div class="action-icon">
+                    ▣
+                </div>
+
+                <strong>
+                    History
+                </strong>
+
+                <small>
+                    Transactions
+                </small>
+
             </button>
 
         </div>
 
 
-        <!-- QUICK INFO -->
-        <div class="panel">
+        <div class="transactions">
 
-            <h3>Account Information</h3>
-
-            <p><strong>Name:</strong> Raymond Titus</p>
-            <p><strong>Account Type:</strong> Demo Savings</p>
-            <p><strong>Status:</strong> Active</p>
-            <p><strong>Currency:</strong> Nigerian Naira (NGN)</p>
-
-        </div>
+            <h2>
+                Recent activity
+            </h2>
 
 
-        <!-- TRANSACTIONS -->
-        <div class="panel" id="transactionPanel">
+            <div class="transaction">
 
-            <h3>Recent Transactions</h3>
+                <div>
+                    <strong>
+                        Demo deposit
+                    </strong>
 
-            <div id="transactions"></div>
+                    <small>
+                        Today
+                    </small>
+                </div>
 
-        </div>
+                <strong class="credit">
+                    +₦50,000
+                </strong>
 
-    </main>
-
-</section>
-
-
-<!-- DEPOSIT MODAL -->
-<div class="modal" id="depositModal">
-
-    <div class="modal-box">
-
-        <h3>Deposit Demo Money</h3>
-
-        <div id="depositMessage" class="message"></div>
-
-        <div class="input-group">
-
-            <label>Amount (₦)</label>
-
-            <input type="number"
-                   id="depositAmount"
-                   placeholder="Enter amount">
-
-        </div>
-
-        <button class="primary-btn"
-                onclick="deposit()">
-            Add Demo Money
-        </button>
-
-        <button class="close"
-                onclick="closeModal('depositModal')">
-            Cancel
-        </button>
-
-    </div>
-
-</div>
+            </div>
 
 
-<!-- WITHDRAW MODAL -->
-<div class="modal" id="withdrawModal">
+            <div class="transaction">
 
-    <div class="modal-box">
+                <div>
+                    <strong>
+                        Demo transfer
+                    </strong>
 
-        <h3>Withdraw Demo Money</h3>
+                    <small>
+                        Yesterday
+                    </small>
+                </div>
 
-        <div id="withdrawMessage" class="message"></div>
+                <strong class="debit">
+                    -₦10,000
+                </strong>
 
-        <div class="input-group">
+            </div>
 
-            <label>Amount (₦)</label>
 
-            <input type="number"
-                   id="withdrawAmount"
-                   placeholder="Enter amount">
+            <div class="transaction">
+
+                <div>
+                    <strong>
+                        Demo deposit
+                    </strong>
+
+                    <small>
+                        Monday
+                    </small>
+                </div>
+
+                <strong class="credit">
+                    +₦25,000
+                </strong>
+
+            </div>
 
         </div>
 
-        <button class="primary-btn"
-                onclick="withdraw()">
-            Withdraw
-        </button>
 
-        <button class="close"
-                onclick="closeModal('withdrawModal')">
-            Cancel
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- TRANSFER MODAL -->
-<div class="modal" id="transferModal">
-
-    <div class="modal-box">
-
-        <h3>Transfer Demo Money</h3>
-
-        <div id="transferMessage" class="message"></div>
-
-        <div class="input-group">
-
-            <label>Recipient Name</label>
-
-            <input type="text"
-                   id="recipient"
-                   placeholder="Recipient name">
-
+        <div class="footer">
+            Ray Wallet — Demo Project
         </div>
-
-        <div class="input-group">
-
-            <label>Account Number</label>
-
-            <input type="text"
-                   id="recipientAccount"
-                   maxlength="10"
-                   placeholder="10-digit account">
-
-        </div>
-
-        <div class="input-group">
-
-            <label>Amount (₦)</label>
-
-            <input type="number"
-                   id="transferAmount"
-                   placeholder="Enter amount">
-
-        </div>
-
-        <button class="primary-btn"
-                onclick="transfer()">
-            Send Demo Money
-        </button>
-
-        <button class="close"
-                onclick="closeModal('transferModal')">
-            Cancel
-        </button>
 
     </div>
 
@@ -578,451 +530,204 @@ button {
 
 <script>
 
-/* =========================
-   BANK DATA
-========================= */
+/* LOGIN */
 
-let balance = 50000;
+const loginForm =
+    document.getElementById("loginForm");
 
-let transactions = [
-    {
-        name: "Initial Demo Balance",
-        amount: 50000,
-        type: "credit",
-        date: new Date().toLocaleString()
-    }
-];
+const loginPage =
+    document.getElementById("loginPage");
 
+const dashboard =
+    document.getElementById("dashboard");
 
-/* =========================
-   LOGIN
-========================= */
+const message =
+    document.getElementById("message");
 
-function login() {
+const loginButton =
+    document.getElementById("loginButton");
 
-    const email =
-        document.getElementById("loginEmail").value.trim();
-
-    const password =
-        document.getElementById("loginPassword").value;
-
-    const message =
-        document.getElementById("loginMessage");
+const displayName =
+    document.getElementById("displayName");
 
 
-    if (
-        email === "demo@raytechbank.test" &&
-        password === "123456"
-    ) {
+/* Check if already logged in */
 
-        document.getElementById("loginPage").style.display =
-            "none";
+if (
+    localStorage.getItem("rayWalletLoggedIn")
+    === "true"
+) {
 
-        document.getElementById("bankApp").style.display =
-            "block";
-
-        updateBalance();
-        renderTransactions();
-
-    } else {
-
-        message.style.display = "block";
-        message.style.background = "#f8d7da";
-        message.style.color = "#842029";
-
-        message.innerText =
-            "Invalid demo login details.";
-
-    }
+    showDashboard();
 
 }
 
 
-/* =========================
-   LOGOUT
-========================= */
+/* Login */
 
-function logout() {
+loginForm.addEventListener(
+    "submit",
+    function(event) {
 
-    document.getElementById("bankApp").style.display =
+        event.preventDefault();
+
+        const username =
+            document.getElementById("username")
+            .value
+            .trim();
+
+        const password =
+            document.getElementById("password")
+            .value;
+
+
+        loginButton.disabled = true;
+
+        loginButton.textContent =
+            "Logging in...";
+
+
+        setTimeout(function() {
+
+            /*
+             * DEMO CREDENTIALS
+             */
+
+            if (
+                username === "raymond" &&
+                password === "1234"
+            ) {
+
+                localStorage.setItem(
+                    "rayWalletLoggedIn",
+                    "true"
+                );
+
+                localStorage.setItem(
+                    "rayWalletUsername",
+                    username
+                );
+
+
+                message.textContent =
+                    "Login successful.";
+
+                message.className =
+                    "success";
+
+
+                setTimeout(function() {
+
+                    showDashboard();
+
+                }, 500);
+
+
+            } else {
+
+                message.textContent =
+                    "Incorrect username or password.";
+
+                message.className =
+                    "error";
+
+                loginButton.disabled =
+                    false;
+
+                loginButton.textContent =
+                    "Login";
+
+            }
+
+        }, 500);
+
+    }
+);
+
+
+/* Show dashboard */
+
+function showDashboard() {
+
+    loginPage.style.display =
         "none";
 
-    document.getElementById("loginPage").style.display =
-        "flex";
-
-}
+    dashboard.style.display =
+        "block";
 
 
-/* =========================
-   BALANCE
-========================= */
-
-function updateBalance() {
-
-    document.getElementById("balance").innerText =
-        "₦" + balance.toLocaleString("en-NG", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-        });
-
-}
-
-
-/* =========================
-   MODALS
-========================= */
-
-function openModal(id) {
-
-    document.getElementById(id).style.display =
-        "flex";
-
-}
-
-
-function closeModal(id) {
-
-    document.getElementById(id).style.display =
-        "none";
-
-}
-
-
-/* =========================
-   DEPOSIT
-========================= */
-
-function deposit() {
-
-    const amount =
-        Number(document.getElementById("depositAmount").value);
-
-    const message =
-        document.getElementById("depositMessage");
-
-
-    if (!amount || amount <= 0) {
-
-        showMessage(
-            message,
-            "Enter a valid amount.",
-            false
+    const savedUsername =
+        localStorage.getItem(
+            "rayWalletUsername"
         );
 
-        return;
+
+    if (savedUsername) {
+
+        displayName.textContent =
+            savedUsername;
+
     }
 
-
-    balance += amount;
-
-
-    transactions.unshift({
-
-        name: "Demo Deposit",
-
-        amount: amount,
-
-        type: "credit",
-
-        date: new Date().toLocaleString()
-
-    });
+}
 
 
-    updateBalance();
+/* Logout */
 
-    renderTransactions();
+document
+    .getElementById("logoutButton")
+    .addEventListener(
+        "click",
+        function() {
+
+            localStorage.removeItem(
+                "rayWalletLoggedIn"
+            );
+
+            localStorage.removeItem(
+                "rayWalletUsername"
+            );
 
 
-    showMessage(
-        message,
-        "Demo deposit successful.",
-        true
+            dashboard.style.display =
+                "none";
+
+            loginPage.style.display =
+                "flex";
+
+
+            document
+                .getElementById("username")
+                .value = "";
+
+            document
+                .getElementById("password")
+                .value = "";
+
+            message.textContent = "";
+
+            loginButton.disabled =
+                false;
+
+            loginButton.textContent =
+                "Login";
+
+        }
     );
 
 
-    document.getElementById("depositAmount").value = "";
+/* Demo buttons */
 
-}
+function demoAction(action) {
 
-
-/* =========================
-   WITHDRAW
-========================= */
-
-function withdraw() {
-
-    const amount =
-        Number(document.getElementById("withdrawAmount").value);
-
-    const message =
-        document.getElementById("withdrawMessage");
-
-
-    if (!amount || amount <= 0) {
-
-        showMessage(
-            message,
-            "Enter a valid amount.",
-            false
-        );
-
-        return;
-    }
-
-
-    if (amount > balance) {
-
-        showMessage(
-            message,
-            "Insufficient demo balance.",
-            false
-        );
-
-        return;
-    }
-
-
-    balance -= amount;
-
-
-    transactions.unshift({
-
-        name: "Demo Withdrawal",
-
-        amount: amount,
-
-        type: "debit",
-
-        date: new Date().toLocaleString()
-
-    });
-
-
-    updateBalance();
-
-    renderTransactions();
-
-
-    showMessage(
-        message,
-        "Demo withdrawal successful.",
-        true
+    alert(
+        action +
+        " is available in demo mode."
     );
 
-
-    document.getElementById("withdrawAmount").value = "";
-
 }
-
-
-/* =========================
-   TRANSFER
-========================= */
-
-function transfer() {
-
-    const recipient =
-        document.getElementById("recipient").value.trim();
-
-    const account =
-        document.getElementById("recipientAccount").value.trim();
-
-    const amount =
-        Number(document.getElementById("transferAmount").value);
-
-    const message =
-        document.getElementById("transferMessage");
-
-
-    if (!recipient) {
-
-        showMessage(
-            message,
-            "Enter recipient name.",
-            false
-        );
-
-        return;
-    }
-
-
-    if (!/^\d{10}$/.test(account)) {
-
-        showMessage(
-            message,
-            "Account number must contain 10 digits.",
-            false
-        );
-
-        return;
-    }
-
-
-    if (!amount || amount <= 0) {
-
-        showMessage(
-            message,
-            "Enter a valid amount.",
-            false
-        );
-
-        return;
-    }
-
-
-    if (amount > balance) {
-
-        showMessage(
-            message,
-            "Insufficient demo balance.",
-            false
-        );
-
-        return;
-    }
-
-
-    balance -= amount;
-
-
-    transactions.unshift({
-
-        name: "Transfer to " + recipient,
-
-        amount: amount,
-
-        type: "debit",
-
-        date: new Date().toLocaleString()
-
-    });
-
-
-    updateBalance();
-
-    renderTransactions();
-
-
-    showMessage(
-        message,
-        "Demo transfer successful to " + recipient + ".",
-        true
-    );
-
-
-    document.getElementById("recipient").value = "";
-    document.getElementById("recipientAccount").value = "";
-    document.getElementById("transferAmount").value = "";
-
-}
-
-
-/* =========================
-   TRANSACTIONS
-========================= */
-
-function renderTransactions() {
-
-    const container =
-        document.getElementById("transactions");
-
-
-    container.innerHTML = "";
-
-
-    transactions.slice(0, 10).forEach(function(transaction) {
-
-        const div =
-            document.createElement("div");
-
-        div.className = "transaction";
-
-
-        const sign =
-            transaction.type === "credit"
-            ? "+"
-            : "-";
-
-
-        const amountClass =
-            transaction.type === "credit"
-            ? "credit"
-            : "debit";
-
-
-        div.innerHTML = `
-
-            <div>
-
-                <div class="transaction-name">
-                    ${transaction.name}
-                </div>
-
-                <div class="transaction-date">
-                    ${transaction.date}
-                </div>
-
-            </div>
-
-            <div class="${amountClass}">
-                ${sign}₦${transaction.amount.toLocaleString("en-NG", {
-                    minimumFractionDigits: 2
-                })}
-            </div>
-
-        `;
-
-
-        container.appendChild(div);
-
-    });
-
-}
-
-
-/* =========================
-   HISTORY
-========================= */
-
-function showTransactions() {
-
-    document
-        .getElementById("transactionPanel")
-        .scrollIntoView({
-            behavior: "smooth"
-        });
-
-}
-
-
-/* =========================
-   MESSAGE
-========================= */
-
-function showMessage(element, text, success) {
-
-    element.style.display = "block";
-
-    element.innerText = text;
-
-
-    if (success) {
-
-        element.style.background = "#d1e7dd";
-        element.style.color = "#0f5132";
-
-    } else {
-
-        element.style.background = "#f8d7da";
-        element.style.color = "#842029";
-
-    }
-
-}
-
 
 </script>
 
 </body>
-  </html>
+</html>
