@@ -1,537 +1,1028 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RayTech Demo Bank</title>
 
-  <title>RayTech Electronics</title>
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, Helvetica, sans-serif;
+body {
+    background: #f2f5f9;
+    color: #172033;
+}
+
+/* LOGIN */
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.login-box {
+    width: 100%;
+    max-width: 400px;
+    background: white;
+    padding: 35px 25px;
+    border-radius: 18px;
+    box-shadow: 0 10px 35px rgba(0,0,0,.12);
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.logo h1 {
+    color: #0757d5;
+    font-size: 30px;
+}
+
+.logo p {
+    color: #777;
+    margin-top: 6px;
+    font-size: 14px;
+}
+
+.demo-warning {
+    background: #fff3cd;
+    color: #856404;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 13px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.input-group {
+    margin-bottom: 16px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #d5dbe5;
+    border-radius: 9px;
+    outline: none;
+    font-size: 15px;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    border-color: #0757d5;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+}
+
+.primary-btn {
+    width: 100%;
+    padding: 14px;
+    background: #0757d5;
+    color: white;
+    border-radius: 9px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.primary-btn:hover {
+    background: #0648af;
+}
+
+.login-info {
+    text-align: center;
+    margin-top: 18px;
+    font-size: 13px;
+    color: #777;
+}
+
+/* APP */
+.app {
+    display: none;
+    min-height: 100vh;
+}
+
+.topbar {
+    background: #0757d5;
+    color: white;
+    padding: 18px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topbar h2 {
+    font-size: 21px;
+}
+
+.logout {
+    background: rgba(255,255,255,.15);
+    color: white;
+    padding: 9px 14px;
+    border-radius: 7px;
+}
+
+/* CONTENT */
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 25px 18px 50px;
+}
+
+.welcome {
+    margin-bottom: 20px;
+}
+
+.welcome h2 {
+    font-size: 25px;
+}
+
+.welcome p {
+    color: #777;
+    margin-top: 5px;
+}
+
+/* BALANCE */
+.balance-card {
+    background: linear-gradient(135deg, #0757d5, #07358d);
+    color: white;
+    padding: 28px;
+    border-radius: 18px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 25px rgba(7,87,213,.25);
+}
+
+.balance-card small {
+    opacity: .8;
+}
+
+.balance {
+    font-size: 36px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.account-number {
+    font-size: 13px;
+    opacity: .8;
+}
+
+/* ACTIONS */
+.actions {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.action-btn {
+    background: white;
+    padding: 18px 10px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,.06);
+    font-weight: bold;
+    color: #172033;
+}
+
+.action-btn span {
+    display: block;
+    font-size: 25px;
+    margin-bottom: 7px;
+}
+
+/* PANELS */
+.panel {
+    background: white;
+    padding: 22px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,.05);
+}
+
+.panel h3 {
+    margin-bottom: 17px;
+}
+
+/* TRANSACTIONS */
+.transaction {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #edf0f4;
+}
+
+.transaction:last-child {
+    border-bottom: none;
+}
+
+.transaction-name {
+    font-weight: bold;
+}
+
+.transaction-date {
+    font-size: 12px;
+    color: #888;
+    margin-top: 4px;
+}
+
+.credit {
+    color: #0a9b55;
+    font-weight: bold;
+}
+
+.debit {
+    color: #d52b2b;
+    font-weight: bold;
+}
+
+/* MODAL */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.55);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 20;
+}
+
+.modal-box {
+    background: white;
+    width: 100%;
+    max-width: 420px;
+    padding: 25px;
+    border-radius: 16px;
+}
+
+.modal-box h3 {
+    margin-bottom: 20px;
+}
+
+.close {
+    background: #eee;
+    padding: 12px;
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 8px;
+}
+
+.message {
+    margin-bottom: 15px;
+    padding: 11px;
+    border-radius: 8px;
+    display: none;
+    font-size: 14px;
+}
+
+/* MOBILE */
+@media(max-width:700px) {
+    .actions {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    html {
-      scroll-behavior: smooth;
+    .balance {
+        font-size: 30px;
     }
 
-    body {
-      background: #f5f7fa;
-      color: #111827;
+    .topbar {
+        padding: 16px;
     }
 
-    header {
-      background: #111827;
-      color: white;
-      padding: 18px 6%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+    .container {
+        padding: 20px 14px;
     }
-
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
-    }
-
-    nav {
-      display: flex;
-      gap: 20px;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-size: 15px;
-      cursor: pointer;
-    }
-
-    nav a:hover {
-      color: #38bdf8;
-    }
-
-    .hero {
-      min-height: 520px;
-      padding: 80px 6%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 40px;
-      background: linear-gradient(135deg, #0f172a, #1e3a8a);
-      color: white;
-    }
-
-    .hero-text {
-      max-width: 600px;
-    }
-
-    .hero h1 {
-      font-size: 48px;
-      line-height: 1.1;
-      margin-bottom: 20px;
-    }
-
-    .hero p {
-      font-size: 18px;
-      line-height: 1.7;
-      margin-bottom: 30px;
-      color: #dbeafe;
-    }
-
-    .btn {
-      display: inline-block;
-      background: #38bdf8;
-      color: #082f49;
-      padding: 14px 25px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      cursor: pointer;
-      border: none;
-    }
-
-    .btn:hover {
-      background: #7dd3fc;
-    }
-
-    .hero-box {
-      width: 300px;
-      height: 300px;
-      border-radius: 25px;
-      background: rgba(255,255,255,0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 100px;
-      border: 1px solid rgba(255,255,255,0.2);
-    }
-
-    section {
-      padding: 70px 6%;
-      scroll-margin-top: 80px;
-    }
-
-    .section-title {
-      text-align: center;
-      margin-bottom: 40px;
-      font-size: 32px;
-    }
-
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 25px;
-    }
-
-    .card {
-      background: white;
-      border-radius: 15px;
-      padding: 25px;
-      text-align: center;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-      transition: 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-    }
-
-    .product-icon {
-      font-size: 60px;
-      margin-bottom: 15px;
-    }
-
-    .card h3 {
-      margin-bottom: 10px;
-      font-size: 21px;
-    }
-
-    .card p {
-      color: #6b7280;
-      line-height: 1.5;
-    }
-
-    .price {
-      color: #2563eb;
-      font-size: 20px;
-      font-weight: bold;
-      margin: 15px 0;
-    }
-
-    .buy-btn {
-      display: inline-block;
-      padding: 11px 20px;
-      background: #111827;
-      color: white;
-      border-radius: 7px;
-      text-decoration: none;
-      cursor: pointer;
-      border: none;
-      font-weight: bold;
-    }
-
-    .buy-btn:hover {
-      background: #2563eb;
-    }
-
-    .about {
-      background: white;
-      text-align: center;
-    }
-
-    .about p {
-      max-width: 700px;
-      margin: auto;
-      line-height: 1.8;
-      color: #4b5563;
-    }
-
-    .contact {
-      text-align: center;
-      background: #e0f2fe;
-    }
-
-    .contact p {
-      margin-bottom: 20px;
-    }
-
-    footer {
-      background: #111827;
-      color: white;
-      text-align: center;
-      padding: 25px;
-    }
-
-    .message {
-      margin-top: 20px;
-      padding: 15px;
-      border-radius: 8px;
-      background: #dcfce7;
-      color: #166534;
-      display: none;
-      font-weight: bold;
-    }
-
-    @media (max-width: 700px) {
-
-      header {
-        flex-direction: column;
-        gap: 15px;
-      }
-
-      nav {
-        gap: 10px;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-
-      nav a {
-        font-size: 14px;
-      }
-
-      .hero {
-        flex-direction: column;
-        text-align: center;
-        padding: 60px 5%;
-      }
-
-      .hero h1 {
-        font-size: 36px;
-      }
-
-      .hero-box {
-        width: 220px;
-        height: 220px;
-        font-size: 70px;
-      }
-    }
-  </style>
+}
+</style>
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header>
+<!-- LOGIN PAGE -->
+<section class="login-page" id="loginPage">
 
-    <div class="logo">
-      ⚡ RayTech
-    </div>
+    <div class="login-box">
 
-    <nav>
-      <a href="#home">Home</a>
-      <a href="#products">Products</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
-
-  </header>
-
-
-  <!-- HOME -->
-  <section class="hero" id="home">
-
-    <div class="hero-text">
-
-      <h1>
-        Smart Electronics.
-        Better Living.
-      </h1>
-
-      <p>
-        Discover quality electronics, gadgets and accessories
-        at affordable prices.
-      </p>
-
-      <a href="#products" class="btn">
-        Shop Now
-      </a>
-
-    </div>
-
-    <div class="hero-box">
-      📱
-    </div>
-
-  </section>
-
-
-  <!-- PRODUCTS -->
-  <section id="products">
-
-    <h2 class="section-title">
-      Featured Products
-    </h2>
-
-    <div class="products">
-
-
-      <!-- PHONE -->
-      <div class="card">
-
-        <div class="product-icon">
-          📱
+        <div class="logo">
+            <h1>RayTech Bank</h1>
+            <p>Digital Banking Demo</p>
         </div>
 
-        <h3>
-          Smartphones
-        </h3>
-
-        <p>
-          Modern smartphones for everyday use.
-        </p>
-
-        <div class="price">
-          From ₦120,000
+        <div class="demo-warning">
+            ⚠️ DEMO SYSTEM — No real money is processed.
         </div>
 
-        <button
-          class="buy-btn"
-          onclick="buyProduct('Smartphone')">
-          Buy Now
+        <div id="loginMessage" class="message"></div>
+
+        <div class="input-group">
+            <label>Email</label>
+            <input type="email" id="loginEmail"
+                   placeholder="Enter your email">
+        </div>
+
+        <div class="input-group">
+            <label>Password</label>
+            <input type="password" id="loginPassword"
+                   placeholder="Enter password">
+        </div>
+
+        <button class="primary-btn" onclick="login()">
+            Login
         </button>
 
-      </div>
-
-
-      <!-- LAPTOP -->
-      <div class="card">
-
-        <div class="product-icon">
-          💻
+        <div class="login-info">
+            Demo login:<br>
+            Email: demo@raytechbank.test<br>
+            Password: 123456
         </div>
 
-        <h3>
-          Laptops
-        </h3>
+    </div>
+</section>
 
-        <p>
-          Powerful laptops for work and school.
-        </p>
 
-        <div class="price">
-          From ₦250,000
+<!-- BANK APP -->
+<section class="app" id="bankApp">
+
+    <header class="topbar">
+        <h2>RayTech Bank</h2>
+
+        <button class="logout" onclick="logout()">
+            Logout
+        </button>
+    </header>
+
+
+    <main class="container">
+
+        <div class="welcome">
+            <h2>Welcome, Raymond 👋</h2>
+            <p>Your demo banking dashboard</p>
         </div>
 
-        <button
-          class="buy-btn"
-          onclick="buyProduct('Laptop')">
-          Buy Now
+
+        <!-- BALANCE -->
+        <div class="balance-card">
+
+            <small>Available Balance</small>
+
+            <div class="balance" id="balance">
+                ₦50,000.00
+            </div>
+
+            <div class="account-number">
+                Account No: 1029384756
+            </div>
+
+        </div>
+
+
+        <!-- ACTION BUTTONS -->
+        <div class="actions">
+
+            <button class="action-btn"
+                    onclick="openModal('depositModal')">
+                <span>💰</span>
+                Deposit
+            </button>
+
+            <button class="action-btn"
+                    onclick="openModal('withdrawModal')">
+                <span>🏧</span>
+                Withdraw
+            </button>
+
+            <button class="action-btn"
+                    onclick="openModal('transferModal')">
+                <span>💸</span>
+                Transfer
+            </button>
+
+            <button class="action-btn"
+                    onclick="showTransactions()">
+                <span>📜</span>
+                History
+            </button>
+
+        </div>
+
+
+        <!-- QUICK INFO -->
+        <div class="panel">
+
+            <h3>Account Information</h3>
+
+            <p><strong>Name:</strong> Raymond Titus</p>
+            <p><strong>Account Type:</strong> Demo Savings</p>
+            <p><strong>Status:</strong> Active</p>
+            <p><strong>Currency:</strong> Nigerian Naira (NGN)</p>
+
+        </div>
+
+
+        <!-- TRANSACTIONS -->
+        <div class="panel" id="transactionPanel">
+
+            <h3>Recent Transactions</h3>
+
+            <div id="transactions"></div>
+
+        </div>
+
+    </main>
+
+</section>
+
+
+<!-- DEPOSIT MODAL -->
+<div class="modal" id="depositModal">
+
+    <div class="modal-box">
+
+        <h3>Deposit Demo Money</h3>
+
+        <div id="depositMessage" class="message"></div>
+
+        <div class="input-group">
+
+            <label>Amount (₦)</label>
+
+            <input type="number"
+                   id="depositAmount"
+                   placeholder="Enter amount">
+
+        </div>
+
+        <button class="primary-btn"
+                onclick="deposit()">
+            Add Demo Money
         </button>
 
-      </div>
-
-
-      <!-- HEADPHONES -->
-      <div class="card">
-
-        <div class="product-icon">
-          🎧
-        </div>
-
-        <h3>
-          Headphones
-        </h3>
-
-        <p>
-          Enjoy clear and powerful sound.
-        </p>
-
-        <div class="price">
-          From ₦25,000
-        </div>
-
-        <button
-          class="buy-btn"
-          onclick="buyProduct('Headphones')">
-          Buy Now
+        <button class="close"
+                onclick="closeModal('depositModal')">
+            Cancel
         </button>
-
-      </div>
-
-
-      <!-- SMART WATCH -->
-      <div class="card">
-
-        <div class="product-icon">
-          ⌚
-        </div>
-
-        <h3>
-          Smart Watches
-        </h3>
-
-        <p>
-          Stay connected wherever you go.
-        </p>
-
-        <div class="price">
-          From ₦35,000
-        </div>
-
-        <button
-          class="buy-btn"
-          onclick="buyProduct('Smart Watch')">
-          Buy Now
-        </button>
-
-      </div>
 
     </div>
 
-  </section>
+</div>
 
 
-  <!-- ABOUT -->
-  <section class="about" id="about">
+<!-- WITHDRAW MODAL -->
+<div class="modal" id="withdrawModal">
 
-    <h2 class="section-title">
-      About RayTech
-    </h2>
+    <div class="modal-box">
 
-    <p>
-      RayTech Electronics provides quality gadgets and electronics
-      for students, professionals and everyday users.
-      Our goal is to make technology simple, affordable and accessible.
-    </p>
+        <h3>Withdraw Demo Money</h3>
 
-  </section>
+        <div id="withdrawMessage" class="message"></div>
 
+        <div class="input-group">
 
-  <!-- CONTACT -->
-  <section class="contact" id="contact">
+            <label>Amount (₦)</label>
 
-    <h2 class="section-title">
-      Contact Us
-    </h2>
+            <input type="number"
+                   id="withdrawAmount"
+                   placeholder="Enter amount">
 
-    <p>
-      Ready to order? Contact us today.
-    </p>
+        </div>
 
-    <button
-      class="btn"
-      onclick="openWhatsApp()">
-      WhatsApp Us
-    </button>
+        <button class="primary-btn"
+                onclick="withdraw()">
+            Withdraw
+        </button>
 
-    <div id="message" class="message">
-      Opening WhatsApp...
+        <button class="close"
+                onclick="closeModal('withdrawModal')">
+            Cancel
+        </button>
+
     </div>
 
-  </section>
+</div>
 
 
-  <!-- FOOTER -->
-  <footer>
+<!-- TRANSFER MODAL -->
+<div class="modal" id="transferModal">
 
-    <p>
-      © 2026 RayTech Electronics.
-      All Rights Reserved.
-    </p>
+    <div class="modal-box">
 
-  </footer>
+        <h3>Transfer Demo Money</h3>
+
+        <div id="transferMessage" class="message"></div>
+
+        <div class="input-group">
+
+            <label>Recipient Name</label>
+
+            <input type="text"
+                   id="recipient"
+                   placeholder="Recipient name">
+
+        </div>
+
+        <div class="input-group">
+
+            <label>Account Number</label>
+
+            <input type="text"
+                   id="recipientAccount"
+                   maxlength="10"
+                   placeholder="10-digit account">
+
+        </div>
+
+        <div class="input-group">
+
+            <label>Amount (₦)</label>
+
+            <input type="number"
+                   id="transferAmount"
+                   placeholder="Enter amount">
+
+        </div>
+
+        <button class="primary-btn"
+                onclick="transfer()">
+            Send Demo Money
+        </button>
+
+        <button class="close"
+                onclick="closeModal('transferModal')">
+            Cancel
+        </button>
+
+    </div>
+
+</div>
 
 
-  <!-- JAVASCRIPT -->
-  <script>
+<script>
 
-    /*
-      TEMPORARY NUMBER
+/* =========================
+   BANK DATA
+========================= */
 
-      We will replace this with your
-      real WhatsApp number later.
+let balance = 50000;
 
-      Format:
-      Nigeria = 234 + phone number
-      No + sign
-      No spaces
-    */
+let transactions = [
+    {
+        name: "Initial Demo Balance",
+        amount: 50000,
+        type: "credit",
+        date: new Date().toLocaleString()
+    }
+];
 
-    const whatsappNumber = "2349034338376";
+
+/* =========================
+   LOGIN
+========================= */
+
+function login() {
+
+    const email =
+        document.getElementById("loginEmail").value.trim();
+
+    const password =
+        document.getElementById("loginPassword").value;
+
+    const message =
+        document.getElementById("loginMessage");
 
 
-    // BUY PRODUCT
-    function buyProduct(productName) {
+    if (
+        email === "demo@raytechbank.test" &&
+        password === "123456"
+    ) {
 
-      const message =
-        "Hello RayTech! I am interested in buying a " +
-        productName +
-        ". Please send me more information.";
+        document.getElementById("loginPage").style.display =
+            "none";
 
-      const url =
-        "https://wa.me/" +
-        whatsappNumber +
-        "?text=" +
-        encodeURIComponent(message);
+        document.getElementById("bankApp").style.display =
+            "block";
 
-      window.open(url, "_blank");
+        updateBalance();
+        renderTransactions();
+
+    } else {
+
+        message.style.display = "block";
+        message.style.background = "#f8d7da";
+        message.style.color = "#842029";
+
+        message.innerText =
+            "Invalid demo login details.";
+
+    }
+
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+function logout() {
+
+    document.getElementById("bankApp").style.display =
+        "none";
+
+    document.getElementById("loginPage").style.display =
+        "flex";
+
+}
+
+
+/* =========================
+   BALANCE
+========================= */
+
+function updateBalance() {
+
+    document.getElementById("balance").innerText =
+        "₦" + balance.toLocaleString("en-NG", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+
+}
+
+
+/* =========================
+   MODALS
+========================= */
+
+function openModal(id) {
+
+    document.getElementById(id).style.display =
+        "flex";
+
+}
+
+
+function closeModal(id) {
+
+    document.getElementById(id).style.display =
+        "none";
+
+}
+
+
+/* =========================
+   DEPOSIT
+========================= */
+
+function deposit() {
+
+    const amount =
+        Number(document.getElementById("depositAmount").value);
+
+    const message =
+        document.getElementById("depositMessage");
+
+
+    if (!amount || amount <= 0) {
+
+        showMessage(
+            message,
+            "Enter a valid amount.",
+            false
+        );
+
+        return;
     }
 
 
-    // WHATSAPP BUTTON
-    function openWhatsApp() {
+    balance += amount;
 
-      const message =
-        "Hello RayTech! I would like to make an enquiry about your electronics.";
 
-      const url =
-        "https://wa.me/" +
-        whatsappNumber +
-        "?text=" +
-        encodeURIComponent(message);
+    transactions.unshift({
 
-      document.getElementById("message").style.display = "block";
+        name: "Demo Deposit",
 
-      window.open(url, "_blank");
+        amount: amount,
+
+        type: "credit",
+
+        date: new Date().toLocaleString()
+
+    });
+
+
+    updateBalance();
+
+    renderTransactions();
+
+
+    showMessage(
+        message,
+        "Demo deposit successful.",
+        true
+    );
+
+
+    document.getElementById("depositAmount").value = "";
+
+}
+
+
+/* =========================
+   WITHDRAW
+========================= */
+
+function withdraw() {
+
+    const amount =
+        Number(document.getElementById("withdrawAmount").value);
+
+    const message =
+        document.getElementById("withdrawMessage");
+
+
+    if (!amount || amount <= 0) {
+
+        showMessage(
+            message,
+            "Enter a valid amount.",
+            false
+        );
+
+        return;
     }
 
-  </script>
+
+    if (amount > balance) {
+
+        showMessage(
+            message,
+            "Insufficient demo balance.",
+            false
+        );
+
+        return;
+    }
+
+
+    balance -= amount;
+
+
+    transactions.unshift({
+
+        name: "Demo Withdrawal",
+
+        amount: amount,
+
+        type: "debit",
+
+        date: new Date().toLocaleString()
+
+    });
+
+
+    updateBalance();
+
+    renderTransactions();
+
+
+    showMessage(
+        message,
+        "Demo withdrawal successful.",
+        true
+    );
+
+
+    document.getElementById("withdrawAmount").value = "";
+
+}
+
+
+/* =========================
+   TRANSFER
+========================= */
+
+function transfer() {
+
+    const recipient =
+        document.getElementById("recipient").value.trim();
+
+    const account =
+        document.getElementById("recipientAccount").value.trim();
+
+    const amount =
+        Number(document.getElementById("transferAmount").value);
+
+    const message =
+        document.getElementById("transferMessage");
+
+
+    if (!recipient) {
+
+        showMessage(
+            message,
+            "Enter recipient name.",
+            false
+        );
+
+        return;
+    }
+
+
+    if (!/^\d{10}$/.test(account)) {
+
+        showMessage(
+            message,
+            "Account number must contain 10 digits.",
+            false
+        );
+
+        return;
+    }
+
+
+    if (!amount || amount <= 0) {
+
+        showMessage(
+            message,
+            "Enter a valid amount.",
+            false
+        );
+
+        return;
+    }
+
+
+    if (amount > balance) {
+
+        showMessage(
+            message,
+            "Insufficient demo balance.",
+            false
+        );
+
+        return;
+    }
+
+
+    balance -= amount;
+
+
+    transactions.unshift({
+
+        name: "Transfer to " + recipient,
+
+        amount: amount,
+
+        type: "debit",
+
+        date: new Date().toLocaleString()
+
+    });
+
+
+    updateBalance();
+
+    renderTransactions();
+
+
+    showMessage(
+        message,
+        "Demo transfer successful to " + recipient + ".",
+        true
+    );
+
+
+    document.getElementById("recipient").value = "";
+    document.getElementById("recipientAccount").value = "";
+    document.getElementById("transferAmount").value = "";
+
+}
+
+
+/* =========================
+   TRANSACTIONS
+========================= */
+
+function renderTransactions() {
+
+    const container =
+        document.getElementById("transactions");
+
+
+    container.innerHTML = "";
+
+
+    transactions.slice(0, 10).forEach(function(transaction) {
+
+        const div =
+            document.createElement("div");
+
+        div.className = "transaction";
+
+
+        const sign =
+            transaction.type === "credit"
+            ? "+"
+            : "-";
+
+
+        const amountClass =
+            transaction.type === "credit"
+            ? "credit"
+            : "debit";
+
+
+        div.innerHTML = `
+
+            <div>
+
+                <div class="transaction-name">
+                    ${transaction.name}
+                </div>
+
+                <div class="transaction-date">
+                    ${transaction.date}
+                </div>
+
+            </div>
+
+            <div class="${amountClass}">
+                ${sign}₦${transaction.amount.toLocaleString("en-NG", {
+                    minimumFractionDigits: 2
+                })}
+            </div>
+
+        `;
+
+
+        container.appendChild(div);
+
+    });
+
+}
+
+
+/* =========================
+   HISTORY
+========================= */
+
+function showTransactions() {
+
+    document
+        .getElementById("transactionPanel")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+function showMessage(element, text, success) {
+
+    element.style.display = "block";
+
+    element.innerText = text;
+
+
+    if (success) {
+
+        element.style.background = "#d1e7dd";
+        element.style.color = "#0f5132";
+
+    } else {
+
+        element.style.background = "#f8d7da";
+        element.style.color = "#842029";
+
+    }
+
+}
+
+
+</script>
 
 </body>
-</html>
+  </html>
